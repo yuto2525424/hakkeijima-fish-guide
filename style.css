@@ -677,3 +677,60 @@ footer button.active-footer {
 
   font-size: 70px;
 }
+
+
+.photo-credit {
+  margin: 8px 4px 16px;
+  text-align: right;
+  font-size: 12px;
+  color: #6f8191;
+  line-height: 1.4;
+}
+
+
+/* ========================================
+   八景島シーパラダイス公式サイト
+======================================== */
+
+.official-link-section {
+  margin-top: 28px;
+}
+
+.official-link-section h2 {
+  margin: 0 0 18px;
+  font-size: 24px;
+  color: #083451;
+}
+
+.official-site-link {
+  box-sizing: border-box;
+  width: 100%;
+
+  background: linear-gradient(
+    135deg,
+    #349df4,
+    #58c6eb
+  );
+
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.official-site-link .button-text span,
+.official-site-link .button-text strong,
+.official-site-link .button-text small,
+.official-site-link .arrow {
+  color: #ffffff;
+}
+
+.official-site-link .button-icon {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.official-site-link:hover {
+  transform: translateY(-2px);
+}
+
+.official-site-link:active {
+  transform: scale(0.98);
+}

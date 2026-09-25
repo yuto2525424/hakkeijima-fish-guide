@@ -18,6 +18,15 @@ const homeScreen = document.body.innerHTML;
 
 
 // ========================================
+// 写真提供者
+// 名前が決まるまでは空欄
+// ========================================
+
+const DEFAULT_PHOTO_CREDIT = "河本　凛";
+
+
+
+// ========================================
 // 共通
 // ========================================
 
@@ -699,14 +708,20 @@ function createFishCards(
 
                 ? `
                   <img
-                    src="${escapeHTML(
-                      fish.image
-                    )}"
+  src="${escapeHTML(
+    fish.image
+  )}"
 
-                    alt="${escapeHTML(
-                      fish.nameJa
-                    )}"
-                  >
+  alt="${escapeHTML(
+    fish.nameJa
+  )}"
+
+  loading="lazy"
+  decoding="async"
+>
+
+
+
                 `
 
                 : "🐟"
@@ -1112,6 +1127,21 @@ function showFishDetail(
       </div>
 
 
+
+      ${
+        fish.image && (fish.photoCredit || DEFAULT_PHOTO_CREDIT)
+          ? `
+            <p class="photo-credit">
+              写真提供：${escapeHTML(
+                fish.photoCredit || DEFAULT_PHOTO_CREDIT
+              )}
+            </p>
+          `
+          : ""
+      }
+
+
+
       <button
         class="back-button"
         onclick="${backAction}"
@@ -1139,36 +1169,11 @@ function showFishDetail(
 
         </p>
 
-        <p>
-          ${escapeHTML(
-            fish.englishName
-            || ""
-          )}
-        </p>
-
+        
       </section>
 
 
-      <section class="feature-section">
-
-        <h2>
-          分類
-        </h2>
-
-        <p>
-
-          ${
-            classification
-              .map(escapeHTML)
-              .join(" ＞ ")
-          }
-
-        </p>
-
-      </section>
-
-
-
+   
 
       <section class="feature-section">
 
@@ -1264,15 +1269,51 @@ function showFishDetail(
         fish.humanRelation
       )}
 
-      ${createTextSection(
+            ${createTextSection(
         "八景島で観察するなら",
         fish.observationPoint
       )}
+
+
+      <section class="feature-section">
+
+        <h2>
+          分類
+        </h2>
+
+        <p>
+          ${
+            classification.length > 0
+              ? classification
+                  .map(escapeHTML)
+                  .join(" ＞ ")
+              : "未入力"
+          }
+        </p>
+
+      </section>
+
+
+      <section class="feature-section">
+
+        <h2>
+          英名
+        </h2>
+
+        <p>
+          ${escapeHTML(
+            fish.englishName || "未入力"
+          )}
+        </p>
+
+      </section>
+
 
       ${createReferences(
         fish.references
       )}
 
+      
 
       <section class="feature-section">
 
