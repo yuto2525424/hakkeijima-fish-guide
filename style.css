@@ -1,0 +1,679 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #369df5;
+  --light-blue: #eaf6ff;
+  --aqua: #53d7cf;
+  --text: #17364a;
+  --sub-text: #78909f;
+  --background: #f4faff;
+  --white: #ffffff;
+  --border: #e2edf4;
+}
+
+html {
+  background: #e8f5fc;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 620px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  padding-bottom: 90px;
+}
+
+
+/* =========================
+   上部
+========================= */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 38px 20px 18px;
+}
+
+.small-title {
+  margin: 0 0 7px;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  background: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+h1 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 34px;
+  line-height: 1.2;
+
+  letter-spacing: -1px;
+}
+
+.logo-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--aqua)
+    );
+
+  color: white;
+
+  font-size: 19px;
+  font-weight: bold;
+
+  box-shadow:
+    0 10px 25px rgba(54, 157, 245, 0.28);
+}
+
+
+/* =========================
+   メイン
+========================= */
+
+main {
+  padding: 0 18px;
+}
+
+
+/* =========================
+   検索
+========================= */
+
+.search-box {
+  width: 100%;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 17px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 19px;
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.07);
+
+  margin-bottom: 15px;
+}
+
+.search-icon {
+  color: var(--blue);
+
+  font-size: 25px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 16px;
+
+  color: var(--text);
+}
+
+.search-box input::placeholder {
+  color: #9badb8;
+}
+
+
+/* =========================
+   大きなメニューボタン
+========================= */
+
+.main-button {
+  width: 100%;
+  min-height: 112px;
+
+  display: grid;
+
+  grid-template-columns:
+    58px
+    1fr
+    25px;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 13px;
+
+  padding: 18px;
+
+  border: none;
+  border-radius: 25px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: transform 0.1s;
+}
+
+.main-button:active {
+  transform: scale(0.98);
+}
+
+
+/* 場所 */
+
+.place-button {
+  background:
+    linear-gradient(
+      135deg,
+      #3fa4fb,
+      #69c9ff
+    );
+
+  color: white;
+
+  box-shadow:
+    0 12px 25px rgba(54, 157, 245, 0.25);
+}
+
+
+/* 魚 */
+
+.fish-button {
+  background: white;
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.08);
+}
+
+
+/* アイコン */
+
+.button-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 19px;
+
+  font-size: 27px;
+}
+
+.place-button .button-icon {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.fish-button .button-icon {
+  background: var(--light-blue);
+}
+
+
+/* テキスト */
+
+.button-text span {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 11px;
+
+  opacity: 0.8;
+}
+
+.button-text strong {
+  display: block;
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.button-text small {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  opacity: 0.75;
+}
+
+.arrow {
+  font-size: 32px;
+
+  text-align: center;
+}
+
+
+/* =========================
+   この図鑑で深く知る
+========================= */
+
+.feature-section {
+  margin-top: 22px;
+
+  padding: 19px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.08);
+}
+
+.feature-section h2 {
+  margin: 0 0 16px;
+
+  font-size: 18px;
+}
+
+.feature-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+}
+
+.feature-card {
+  padding: 15px;
+
+  background: #f6fbfe;
+
+  border-radius: 17px;
+}
+
+.feature-card span {
+  display: block;
+
+  color: var(--blue);
+
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.feature-card strong {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 16px;
+}
+
+.feature-card small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   下メニュー
+========================= */
+
+footer {
+  position: fixed;
+
+  bottom: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(100%, 620px);
+  height: 76px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  background:
+    rgba(255, 255, 255, 0.97);
+
+  border-top:
+    1px solid var(--border);
+
+  padding: 7px 20px;
+}
+
+footer button {
+  border: none;
+
+  background: transparent;
+
+  color: #859ba9;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+footer button:first-child {
+  color: var(--blue);
+}
+
+footer button span {
+  font-size: 21px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 500px) {
+
+  .app-header {
+    padding:
+      30px
+      17px
+      17px;
+  }
+
+  h1 {
+    font-size: 31px;
+  }
+
+  main {
+    padding:
+      0
+      15px;
+  }
+
+  .main-button {
+    min-height: 105px;
+  }
+}
+/* =========================
+   戻るボタン
+========================= */
+
+.back-button {
+  border: none;
+  background: transparent;
+
+  color: var(--blue);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  margin-bottom: 18px;
+
+  padding: 8px 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   LABO一覧
+========================= */
+
+.labo-list {
+  display: grid;
+
+  gap: 11px;
+}
+
+
+.labo-card {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    76px
+    1fr
+    25px;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 19px;
+
+  background: white;
+
+  text-align: left;
+
+  box-shadow:
+    0 8px 20px rgba(40, 90, 120, 0.07);
+
+  cursor: pointer;
+}
+
+
+.labo-number {
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e6f4ff,
+      #e8fbf8
+    );
+
+  border-radius: 16px;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+.labo-info strong {
+  display: block;
+
+  font-size: 16px;
+}
+
+
+.labo-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   空データ表示
+========================= */
+
+.empty-card {
+  margin-top: 15px;
+
+  padding: 35px 20px;
+
+  background: white;
+
+  border: 1px dashed #cbdfe9;
+  border-radius: 24px;
+
+  text-align: center;
+}
+
+
+.empty-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 15px;
+
+  background: var(--light-blue);
+
+  border-radius: 18px;
+
+  font-size: 27px;
+}
+
+
+.empty-card h2 {
+  margin: 0 0 7px;
+
+  font-size: 18px;
+}
+
+
+.empty-card p {
+  margin: 0;
+
+  padding: 0;
+
+  background: none;
+
+  box-shadow: none;
+
+  color: var(--sub-text);
+
+  font-size: 13px;
+}
+
+
+/* 下メニュー選択中 */
+
+footer button.active-footer {
+  color: var(--blue);
+}
+/* =========================
+   魚写真
+========================= */
+
+
+/* 魚一覧の写真 */
+
+.fish-list-image {
+  width: 72px;
+  height: 72px;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--light-blue);
+
+  font-size: 28px;
+}
+
+.fish-list-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* 詳細ページの大きな写真 */
+
+.fish-detail-image {
+  width: 100%;
+
+  margin-bottom: 18px;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  background: var(--light-blue);
+
+  box-shadow:
+    0 10px 28px rgba(40, 90, 120, 0.12);
+}
+
+.fish-detail-image img {
+  display: block;
+
+  width: 100%;
+  height: 300px;
+
+  object-fit: cover;
+}
+
+.fish-image-placeholder {
+  height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 70px;
+}
