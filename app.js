@@ -1116,27 +1116,41 @@ function showFishDetail(
 
   document.body.innerHTML = `
 
-    <header class="app-header">
+   <header class="app-header">
 
-      <div>
+  <div>
 
-  <p class="small-title">
-  CREATURE DETAIL
-</p>
+    <button
+      class="back-button"
+      onclick="${backAction}"
+    >
+      ← 一覧へ戻る
+    </button>
 
-<h1>
-  ${escapeHTML(
-    fish.nameJa
-  )}
-</h1>
+    <p class="small-title">
+      CREATURE DETAIL
+    </p>
 
-</div>
+    <h1>
+      ${escapeHTML(
+        fish.nameJa
+      )}
+    </h1>
 
-    </header>
+  </div>
+
+</header>
 
 
     <main>
 
+
+<main>
+
+  
+
+
+  <div class="fish-detail-image">
 
       <div class="fish-detail-image">
 
@@ -1188,14 +1202,7 @@ function showFishDetail(
 
 
 
-      <button
-        class="back-button"
-        onclick="${backAction}"
-      >
-        ← 一覧へ戻る
-      </button>
-
-
+    
 
    
 
