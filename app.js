@@ -226,18 +226,35 @@ function showFacilities() {
 
       facilityHTML += `
 
-        <button
-          class="main-button fish-button"
-          onclick="
-            showFacilityAreas(
-              '${facility.id}'
-            )
-          "
-        >
+      <button
+  class="main-button fish-button facility-card"
+  data-facility="${facility.id}"
+  onclick="
+    showFacilityAreas(
+      '${facility.id}'
+    )
+  "
+>
 
-          <div class="button-icon">
-            ${facility.icon}
-          </div>
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           <div class="button-text">
@@ -273,17 +290,17 @@ function showFacilities() {
 
   document.body.innerHTML = `
 
-    <header class="app-header">
+  <header class="app-header location-header">
 
       <div>
 
-        <p class="small-title">
-          LOCATION
-        </p>
+      <p class="small-title">
+  AQUARIUM
+</p>
 
-        <h1>
-          今いる施設は？
-        </h1>
+<h1>
+  水族館から探す
+</h1>
 
       </div>
 
@@ -292,6 +309,8 @@ function showFacilities() {
 
     <main>
 
+
+
       <button
         class="back-button"
         onclick="showHome()"
@@ -299,15 +318,17 @@ function showFacilities() {
         ← ホームに戻る
       </button>
 
-
       <div class="facility-list">
 
         ${facilityHTML}
 
       </div>
 
-    </main>
+      <p class="ai-note">
+        ※本サイトの生物情報の一部は、文献・公開情報などを参考に、AIを活用して作成・整理しています。正確性の確認に努めていますが、誤りや情報の更新遅れが生じる場合があります。
+      </p>
 
+    </main>
 
     ${createFooter("place")}
 
@@ -453,7 +474,10 @@ function showFacilityAreas(
 
   document.body.innerHTML = `
 
-    <header class="app-header">
+    <header
+  class="app-header facility-theme"
+  data-facility="${facilityId}"
+>
 
       <div>
 
@@ -474,6 +498,10 @@ function showFacilityAreas(
 
     <main>
 
+
+
+
+
       <button
         class="back-button"
         onclick="showFacilities()"
@@ -482,11 +510,14 @@ function showFacilityAreas(
       </button>
 
 
-      <div class="labo-list">
+     <div
+  class="labo-list facility-theme"
+  data-facility="${facilityId}"
+>
 
-        ${areaHTML}
+  ${areaHTML}
 
-      </div>
+</div>
 
     </main>
 
@@ -611,7 +642,10 @@ function showArea(
 
   document.body.innerHTML = `
 
-    <header class="app-header">
+<header
+  class="app-header facility-theme"
+  data-facility="${facilityId}"
+>
 
       <div>
 
@@ -621,11 +655,27 @@ function showArea(
           )}
         </p>
 
-        <h1>
-          ${escapeHTML(
-            getAreaCode(area)
-          )}
-        </h1>
+       <h1 class="area-page-title">
+  <span>
+    ${escapeHTML(
+      getAreaCode(area)
+    )}
+  </span>
+
+  <span class="area-page-name">
+    ${escapeHTML(
+      area.name
+    )}
+  </span>
+</h1>
+
+
+
+
+
+
+
+
 
       </div>
 
@@ -646,16 +696,7 @@ function showArea(
       </button>
 
 
-      <section class="feature-section">
-
-        <h2>
-          ${escapeHTML(
-            area.name
-          )}
-        </h2>
-
-      </section>
-
+      
 
       ${fishHTML}
 
@@ -782,16 +823,16 @@ function showFishList(
 
   document.body.innerHTML = `
 
-    <header class="app-header">
+  <header class="app-header fish-list-header">
 
       <div>
 
         <p class="small-title">
-          FISH
+        CREATURES
         </p>
 
         <h1>
-          魚から探す
+          生きものから探す
         </h1>
 
       </div>
@@ -799,7 +840,8 @@ function showFishList(
     </header>
 
 
-    <main>
+    <main class="fish-list-main">
+
 
       <button
         class="back-button"
@@ -818,14 +860,17 @@ function showFishList(
         <input
           id="fish-search-input"
           type="text"
-          placeholder="魚の名前を検索"
+         placeholder="生きものの名前を検索"
           value="${escapeHTML(
             initialQuery
           )}"
         >
 
-      </div>
+            </div>
 
+      <p class="ai-note">
+        ※本サイトの生物情報の一部は、文献・公開情報などを参考に、AIを活用して作成・整理しています。正確性の確認に努めていますが、誤りや情報の更新遅れが生じる場合があります。
+      </p>
 
       <div
         id="fish-search-results"
@@ -951,7 +996,7 @@ function updateFishSearch(query) {
         </div>
 
         <h2>
-          該当する魚がありません
+          該当する生きものがありません
         </h2>
 
         <p>
@@ -1075,22 +1120,17 @@ function showFishDetail(
 
       <div>
 
-        <p class="small-title">
-          FISH DETAIL
-        </p>
+  <p class="small-title">
+  CREATURE DETAIL
+</p>
 
-        <h1>
-          ${escapeHTML(
-            fish.nameJa
-          )}
-        </h1>
+<h1>
+  ${escapeHTML(
+    fish.nameJa
+  )}
+</h1>
 
-      </div>
-
-
-      <div class="logo-icon">
-        🐟
-      </div>
+</div>
 
     </header>
 
@@ -1104,15 +1144,21 @@ function showFishDetail(
           fish.image
 
             ? `
-              <img
-                src="${escapeHTML(
-                  fish.image
-                )}"
+             <img
+  src="${escapeHTML(
+    fish.image
+  )}"
 
-                alt="${escapeHTML(
-                  fish.nameJa
-                )}"
-              >
+  alt="${escapeHTML(
+    fish.nameJa
+  )}"
+
+  onclick="openImageZoom(this)"
+>
+
+
+
+
             `
 
             : `
@@ -1149,28 +1195,6 @@ function showFishDetail(
         ← 一覧へ戻る
       </button>
 
-
-      <section class="feature-section">
-
-        <h2>
-          ${escapeHTML(
-            fish.nameJa
-          )}
-        </h2>
-
-        <p>
-
-          <i>
-            ${escapeHTML(
-              fish.scientificName
-              || ""
-            )}
-          </i>
-
-        </p>
-
-        
-      </section>
 
 
    
@@ -1275,13 +1299,31 @@ function showFishDetail(
       )}
 
 
+          
+
+
       <section class="feature-section">
 
         <h2>
-          分類
+          図鑑データ
         </h2>
 
         <p>
+          <strong>学名：</strong>
+          <i>${escapeHTML(
+            fish.scientificName || "未入力"
+          )}</i>
+        </p>
+
+        <p>
+          <strong>英名：</strong>
+          ${escapeHTML(
+            fish.englishName || "未入力"
+          )}
+        </p>
+
+        <p>
+          <strong>分類：</strong>
           ${
             classification.length > 0
               ? classification
@@ -1292,23 +1334,6 @@ function showFishDetail(
         </p>
 
       </section>
-
-
-      <section class="feature-section">
-
-        <h2>
-          英名
-        </h2>
-
-        <p>
-          ${escapeHTML(
-            fish.englishName || "未入力"
-          )}
-        </p>
-
-      </section>
-
-
       ${createReferences(
         fish.references
       )}
@@ -1488,6 +1513,80 @@ function createReferences(
 }
 
 
+
+// ========================================
+// 写真拡大
+// ========================================
+
+function openImageZoom(imageElement) {
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.className =
+    "image-zoom-overlay";
+
+
+  const image =
+    document.createElement("img");
+
+  image.src =
+    imageElement.src;
+
+  image.alt =
+    imageElement.alt;
+
+
+  const closeButton =
+    document.createElement("button");
+
+  closeButton.className =
+    "image-zoom-close";
+
+  closeButton.textContent =
+    "×";
+
+
+  function closeZoom() {
+
+    overlay.remove();
+
+    document.body.style.overflow = "";
+
+  }
+
+
+  closeButton.addEventListener(
+    "click",
+    closeZoom
+  );
+
+
+  overlay.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === overlay) {
+        closeZoom();
+      }
+
+    }
+  );
+
+
+  overlay.appendChild(image);
+  overlay.appendChild(closeButton);
+
+  document.body.appendChild(overlay);
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+
+
 // ========================================
 // 下メニュー
 // ========================================
@@ -1542,7 +1641,7 @@ function createFooter(active) {
 
         <span>⌕</span>
 
-        魚
+        生きもの
 
       </button>
 
