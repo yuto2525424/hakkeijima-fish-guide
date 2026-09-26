@@ -454,7 +454,7 @@ footer button span {
 
   color: var(--blue);
 
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
 
   margin-bottom: 18px;
@@ -1296,5 +1296,214 @@ footer button.active-footer {
 
   cursor: pointer;
 }
+
+
+/* 公式サイト案内の上に区切り線 */
+.official-link-section {
+  border-top: 2px dashed #aebfca;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+
+
+/* ========================================
+   ホームタイトルを帯にする
+======================================== */
+
+.home-header h1 {
+  display: block;
+
+  width: 100%;
+
+  margin: 10px 0 0;
+  padding: 16px 12px;
+
+  background: #b9dff5;
+  color: #17364a;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+
+  font-size: 34px;
+  font-weight: 800;
+}
+
+/* ========================================
+   ホームタイトル全体を1本の帯にする
+======================================== */
+
+.home-header > div {
+  width: 100%;
+
+  padding: 15px 16px 18px;
+
+  background: #b9dff5;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+/* 英語タイトル */
+.home-header .small-title {
+  margin: 0 0 7px;
+
+  padding: 0;
+  background: transparent;
+
+  color: #369df5;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+
+/* 八景島水族館図鑑 */
+.home-header h1 {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: #17364a;
+
+  text-align: center;
+}
+
+
+
+/* ========================================
+   水族館・生きもの一覧のタイトル帯
+======================================== */
+
+.location-header > div,
+.fish-list-header > div {
+  width: 100%;
+
+  padding: 15px 16px 18px;
+
+  background: #b9dff5;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+/* 上の英語 */
+.location-header .small-title,
+.fish-list-header .small-title {
+  margin: 0 0 7px;
+
+  padding: 0;
+  background: transparent;
+
+  color: #369df5;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+
+/* 日本語タイトル */
+.location-header h1,
+.fish-list-header h1 {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: #17364a;
+
+  text-align: center;
+}
+
+/* 生きもの詳細ページ */
+.creature-detail-header > div {
+  width: 100%;
+}
+
+.creature-detail-name {
+  width: 100%;
+  text-align: center;
+}
+
+
+
+/* ========================================
+   LABO・展示エリア画面のタイトル帯
+======================================== */
+
+.app-header.facility-theme > div {
+  width: 100%;
+
+  padding: 15px 16px 18px;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+/* アクアミュージアム */
+.app-header.facility-theme[data-facility="aquamuseum"] > div {
+  background: #f2e8fb;
+}
+
+
+/* ドルフィン ファンタジー */
+.app-header.facility-theme[data-facility="dolphin-fantasy"] > div {
+  background: #e2f5ff;
+}
+
+
+/* うみファーム */
+.app-header.facility-theme[data-facility="umi-farm"] > div {
+  background: #d8e7f0;
+}
+
+
+/* ふれあいラグーン */
+.app-header.facility-theme[data-facility="fureai-lagoon"] > div {
+  background: #e5f5e8;
+}
+
+
+/* 帯の中の文字 */
+.app-header.facility-theme h1 {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+
+
+
 
 

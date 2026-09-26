@@ -1116,7 +1116,7 @@ function showFishDetail(
 
   document.body.innerHTML = `
 
-   <header class="app-header">
+   <header class="app-header creature-detail-header">
 
   <div>
 
@@ -1127,15 +1127,11 @@ function showFishDetail(
       ← 一覧へ戻る
     </button>
 
-    <p class="small-title">
-      CREATURE DETAIL
-    </p>
-
-    <h1>
-      ${escapeHTML(
-        fish.nameJa
-      )}
-    </h1>
+    <h1 class="creature-detail-name">
+  ${escapeHTML(
+    fish.nameJa
+  )}
+</h1>
 
   </div>
 
