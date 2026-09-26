@@ -1447,63 +1447,84 @@ footer button.active-footer {
 
 
 
+
+
+
+
+
 /* ========================================
-   LABO・展示エリア画面のタイトル帯
+   生きもの詳細ページ
+   説明カード間の水色をなくす
 ======================================== */
 
-.app-header.facility-theme > div {
-  width: 100%;
+.creature-detail-main {
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding-top: 18px;
+}
 
-  padding: 15px 16px 18px;
+/* 説明カード同士は少し間隔を空ける */
+.creature-detail-main .feature-section {
+  margin-top: 20px;
+  border: 1px solid #e2edf4;
+  box-shadow: 0 6px 16px rgba(40, 90, 120, 0.08);
+}
 
-  border: none;
-  border-radius: 4px;
 
-  box-shadow: none;
 
+/* 生きもの詳細ページの説明を中央寄せ */
+.creature-detail-main .feature-section {
+  text-align: center;
+}
+
+.creature-detail-main .feature-section h2,
+.creature-detail-main .feature-section p {
   text-align: center;
 }
 
 
-/* アクアミュージアム */
-.app-header.facility-theme[data-facility="aquamuseum"] > div {
-  background: #f2e8fb;
-}
 
 
-/* ドルフィン ファンタジー */
-.app-header.facility-theme[data-facility="dolphin-fantasy"] > div {
-  background: #e2f5ff;
-}
 
 
-/* うみファーム */
-.app-header.facility-theme[data-facility="umi-farm"] > div {
-  background: #d8e7f0;
-}
+/* ========================================
+   各ページのタイトル帯をやめて下線に統一
+======================================== */
 
-
-/* ふれあいラグーン */
-.app-header.facility-theme[data-facility="fureai-lagoon"] > div {
-  background: #e5f5e8;
-}
-
-
-/* 帯の中の文字 */
-.app-header.facility-theme h1 {
-  margin: 0;
-  padding: 0;
-
+/* 帯の背景をすべて消す */
+.home-header > div,
+.location-header > div,
+.fish-list-header > div,
+.app-header.facility-theme > div {
   background: transparent;
   border: none;
+  border-radius: 0;
   box-shadow: none;
-
-  text-align: center;
+  padding: 0;
 }
 
 
+/* タイトル自体の背景も消す */
+.home-header h1,
+.location-header h1,
+.fish-list-header h1,
+.app-header.facility-theme h1 {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 
+  width: 72%;
+  max-width: 420px;
 
+  margin-left: auto;
+  margin-right: auto;
 
+  padding: 0 0 14px;
+
+  border-bottom: 2px solid #8eb3c9;
+
+  text-align: center;
+}
 
 

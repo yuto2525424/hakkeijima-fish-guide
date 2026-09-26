@@ -1138,10 +1138,10 @@ function showFishDetail(
 </header>
 
 
-    <main>
+ <main class="creature-detail-main">
 
 
-<main>
+ <main class="creature-detail-main">
 
   
 
