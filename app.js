@@ -257,23 +257,24 @@ function showFacilities() {
 
 
 
-          <div class="button-text">
+     <div class="button-text">
 
-            <span>
-              FACILITY
-            </span>
+  <strong>
+    ${escapeHTML(
+      facility.name
+    )}
+  </strong>
 
-            <strong>
-              ${escapeHTML(
-                facility.name
-              )}
-            </strong>
+  <small>
+  ここにいる生きものを見る
+</small>
 
-            <small>
-              展示場所から探す
-            </small>
+</div>
 
-          </div>
+
+
+
+
 
 
           <div class="arrow">
@@ -729,10 +730,30 @@ function createFishCards(
   fishes.forEach(
     function(fish) {
 
+      const cardFeature =
+        (
+          Array.isArray(fish.trivia)
+          &&
+          fish.trivia.length > 0
+          &&
+          fish.trivia[0].title
+        )
+
+          ? fish.trivia[0].title
+
+          : (
+              fish.identification
+              ||
+              fish.features
+              ||
+              "もっと詳しく見てみよう"
+            );
+
+
       html += `
 
         <button
-          class="main-button fish-button"
+          class="main-button fish-button creature-card"
           onclick="
             showFishDetail(
               '${fish.id}',
@@ -749,20 +770,17 @@ function createFishCards(
 
                 ? `
                   <img
-  src="${escapeHTML(
-    fish.image
-  )}"
+                    src="${escapeHTML(
+                      fish.image
+                    )}"
 
-  alt="${escapeHTML(
-    fish.nameJa
-  )}"
+                    alt="${escapeHTML(
+                      fish.nameJa
+                    )}"
 
-  loading="lazy"
-  decoding="async"
->
-
-
-
+                    loading="lazy"
+                    decoding="async"
+                  >
                 `
 
                 : "🐟"
@@ -773,25 +791,61 @@ function createFishCards(
 
           <div class="button-text">
 
-            <span>
-              ${escapeHTML(
-                fish.category
-                || "魚類"
-              )}
-            </span>
-
             <strong>
               ${escapeHTML(
                 fish.nameJa
               )}
             </strong>
 
-            <small>
-              ${escapeHTML(
-                fish.scientificName
-                || ""
-              )}
-            </small>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <div class="creature-card-feature-row">
+
+  <span class="creature-card-badge">
+    注目
+  </span>
+
+  <small class="creature-card-feature">
+    ${escapeHTML(
+      cardFeature
+    )}
+  </small>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           </div>
 
@@ -799,6 +853,22 @@ function createFishCards(
           <div class="arrow">
             ›
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </button>
 
@@ -811,6 +881,12 @@ function createFishCards(
   return html;
 
 }
+
+
+
+
+
+
 
 
 // ========================================
