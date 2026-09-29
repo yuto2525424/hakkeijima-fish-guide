@@ -2246,7 +2246,7 @@ footer::before {
 body {
   background-image:
     linear-gradient(
-      rgba(230, 239, 244, 0.52),
+      rgba(230, 239, 244, 0.15),
       rgba(230, 239, 244, 0.72)
     ),
     url("images/background-aquarium.png");
@@ -2265,3 +2265,7 @@ body:has(.fish-list-main) {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
+
+
