@@ -2242,6 +2242,2250 @@ footer::before {
 }
 
 /* 水族館背景画像 */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --blue: #369df5;
+  --light-blue: #eaf6ff;
+  --aqua: #53d7cf;
+  --text: #17364a;
+  --sub-text: #78909f;
+ --background: #e6eff4;
+  --white: #ffffff;
+  --border: #e2edf4;
+}
+
+html {
+  background: #d9e6ed;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 620px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text);
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  padding-bottom: 90px;
+}
+
+
+/* =========================
+   上部
+========================= */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 38px 20px 18px;
+}
+
+.small-title {
+  margin: 0 0 7px;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  background: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+h1 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 34px;
+  line-height: 1.2;
+
+  letter-spacing: -1px;
+}
+
+.logo-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue),
+      var(--aqua)
+    );
+
+  color: white;
+
+  font-size: 19px;
+  font-weight: bold;
+
+  box-shadow:
+    0 10px 25px rgba(54, 157, 245, 0.28);
+}
+
+
+/* =========================
+   メイン
+========================= */
+
+main {
+  padding: 0 18px;
+}
+
+
+/* =========================
+   検索
+========================= */
+
+.search-box {
+  width: 100%;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 17px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 19px;
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.07);
+
+  margin-bottom: 15px;
+}
+
+.search-icon {
+  color: var(--blue);
+
+  font-size: 25px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 16px;
+
+  color: var(--text);
+}
+
+.search-box input::placeholder {
+  color: #9badb8;
+}
+
+
+/* =========================
+   大きなメニューボタン
+========================= */
+
+.main-button {
+  width: 100%;
+  min-height: 112px;
+
+  display: grid;
+
+  grid-template-columns:
+    58px
+    1fr
+    25px;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 13px;
+
+  padding: 18px;
+
+  border: none;
+  border-radius: 25px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: transform 0.1s;
+}
+
+.main-button:active {
+  transform: scale(0.98);
+}
+
+
+/* 場所 */
+
+.place-button {
+  background:
+    linear-gradient(
+      135deg,
+      #3fa4fb,
+      #69c9ff
+    );
+
+  color: white;
+
+  box-shadow:
+    0 12px 25px rgba(54, 157, 245, 0.25);
+}
+
+
+/* 魚 */
+
+.fish-button {
+  background: white;
+
+  color: var(--text);
+
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.08);
+}
+
+
+/* アイコン */
+
+.button-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 19px;
+
+  font-size: 27px;
+}
+
+.place-button .button-icon {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.fish-button .button-icon {
+  background: var(--light-blue);
+}
+
+
+/* テキスト */
+
+.button-text span {
+  display: block;
+
+  margin-bottom: 2px;
+
+  font-size: 11px;
+
+  opacity: 0.8;
+}
+
+.button-text strong {
+  display: block;
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.button-text small {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  opacity: 0.75;
+}
+
+.arrow {
+  font-size: 32px;
+
+  text-align: center;
+}
+
+
+/* =========================
+   この図鑑で深く知る
+========================= */
+
+.feature-section {
+  margin-top: 22px;
+
+  padding: 19px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(40, 90, 120, 0.08);
+}
+
+.feature-section h2 {
+  margin: 0 0 16px;
+
+  font-size: 18px;
+}
+
+.feature-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 10px;
+}
+
+.feature-card {
+  padding: 15px;
+
+  background: #f6fbfe;
+
+  border-radius: 17px;
+}
+
+.feature-card span {
+  display: block;
+
+  color: var(--blue);
+
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.feature-card strong {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 16px;
+}
+
+.feature-card small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   下メニュー
+========================= */
+
+footer {
+  position: fixed;
+
+  bottom: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(100%, 620px);
+  height: 76px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  background:
+    rgba(255, 255, 255, 0.97);
+
+  border-top:
+    1px solid var(--border);
+
+  padding: 7px 20px;
+}
+
+footer button {
+  border: none;
+
+  background: transparent;
+
+  color: #859ba9;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+footer button:first-child {
+  color: var(--blue);
+}
+
+footer button span {
+  font-size: 21px;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 500px) {
+
+  .app-header {
+    padding:
+      30px
+      17px
+      17px;
+  }
+
+  h1 {
+    font-size: 31px;
+  }
+
+  main {
+    padding:
+      0
+      15px;
+  }
+
+  .main-button {
+    min-height: 105px;
+  }
+}
+/* =========================
+   戻るボタン
+========================= */
+
+.back-button {
+  border: none;
+  background: transparent;
+
+  color: var(--blue);
+
+  font-size: 16px;
+  font-weight: 700;
+
+  margin-bottom: 18px;
+
+  padding: 8px 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   LABO一覧
+========================= */
+
+.labo-list {
+  display: grid;
+
+  gap: 11px;
+}
+
+
+.labo-card {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    76px
+    1fr
+    25px;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 19px;
+
+  background: white;
+
+  text-align: left;
+
+  box-shadow:
+    0 8px 20px rgba(40, 90, 120, 0.07);
+
+  cursor: pointer;
+}
+
+
+.labo-number {
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e6f4ff,
+      #e8fbf8
+    );
+
+  border-radius: 16px;
+
+  color: var(--blue);
+
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+.labo-info strong {
+  display: block;
+
+  font-size: 16px;
+}
+
+
+.labo-info small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   空データ表示
+========================= */
+
+.empty-card {
+  margin-top: 15px;
+
+  padding: 35px 20px;
+
+  background: white;
+
+  border: 1px dashed #cbdfe9;
+  border-radius: 24px;
+
+  text-align: center;
+}
+
+
+.empty-icon {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 15px;
+
+  background: var(--light-blue);
+
+  border-radius: 18px;
+
+  font-size: 27px;
+}
+
+
+.empty-card h2 {
+  margin: 0 0 7px;
+
+  font-size: 18px;
+}
+
+
+.empty-card p {
+  margin: 0;
+
+  padding: 0;
+
+  background: none;
+
+  box-shadow: none;
+
+  color: var(--sub-text);
+
+  font-size: 13px;
+}
+
+
+/* 下メニュー選択中 */
+
+footer button.active-footer {
+  color: var(--blue);
+}
+/* =========================
+   魚写真
+========================= */
+
+
+/* 魚一覧の写真 */
+
+.fish-list-image {
+  width: 72px;
+  height: 72px;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--light-blue);
+
+  font-size: 28px;
+}
+
+.fish-list-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* 詳細ページの大きな写真 */
+
+.fish-detail-image {
+  width: 100%;
+
+  margin-bottom: 18px;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  background: var(--light-blue);
+
+  box-shadow:
+    0 10px 28px rgba(40, 90, 120, 0.12);
+}
+
+.fish-detail-image img {
+  display: block;
+
+  width: 100%;
+  height: 300px;
+
+  object-fit: cover;
+}
+
+.fish-image-placeholder {
+  height: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 70px;
+}
+
+
+.photo-credit {
+  margin: 8px 4px 16px;
+  text-align: right;
+  font-size: 12px;
+  color: #6f8191;
+  line-height: 1.4;
+}
+
+
+/* ========================================
+   八景島シーパラダイス公式サイト
+======================================== */
+
+.official-link-section {
+  margin-top: 28px;
+}
+
+.official-link-section h2 {
+  margin: 0 0 18px;
+  font-size: 24px;
+  color: #083451;
+}
+
+.official-site-link {
+  box-sizing: border-box;
+  width: 100%;
+
+  background: linear-gradient(
+    135deg,
+    #349df4,
+    #58c6eb
+  );
+
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.official-site-link .button-text span,
+.official-site-link .button-text strong,
+.official-site-link .button-text small,
+.official-site-link .arrow {
+  color: #ffffff;
+}
+
+.official-site-link .button-icon {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.official-site-link:hover {
+  transform: translateY(-2px);
+}
+
+.official-site-link:active {
+  transform: scale(0.98);
+}
+
+
+
+.unofficial-notice {
+  margin: 28px 8px 8px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #7b8b96;
+}
+
+
+
+
+.ai-note {
+  margin: 14px 4px 22px;
+  font-size: 8px;
+  line-height: 1.5;
+  color: #6f8191;
+}
+
+
+/* ========================================
+   ホーム画面 中央寄せ
+======================================== */
+
+.home-header {
+  justify-content: center;
+  text-align: center;
+}
+
+.home-header > div {
+  width: 100%;
+}
+
+.home-main .search-box input {
+  text-align: center;
+}
+
+.home-main .button-text {
+  text-align: center;
+  align-items: center;
+}
+
+.home-main .button-text span,
+.home-main .button-text strong,
+.home-main .button-text small {
+  width: 100%;
+  text-align: center;
+}
+
+.home-main .official-link-section h2 {
+  text-align: center;
+}
+
+.home-main .ai-note {
+  text-align: center;
+}
+
+
+.location-header {
+  justify-content: center;
+  text-align: center;
+}
+
+.location-header > div {
+  width: 100%;
+}
+
+/* 施設一覧カードの文字を中央寄せ */
+.facility-list .button-text {
+  text-align: center;
+  align-items: center;
+}
+
+.facility-list .button-text span,
+.facility-list .button-text strong,
+.facility-list .button-text small {
+  width: 100%;
+  text-align: center;
+}
+
+/* ========================================
+   施設カラー
+======================================== */
+
+:root {
+  --aquamuseum-color: #8b5fc7;
+  --dolphin-color: #2f9de2;
+  --umifarm-color: #176a9c;
+  --fureai-color: #58a96b;
+}
+
+
+/* ========================================
+   施設一覧カードを色で囲む
+======================================== */
+
+.facility-card {
+  border: 2px solid transparent;
+  grid-template-columns: 1fr 25px;
+}
+
+.facility-card[data-facility="aquamuseum"] {
+  border-color: var(--aquamuseum-color);
+}
+
+.facility-card[data-facility="dolphin-fantasy"] {
+  border-color: var(--dolphin-color);
+}
+
+.facility-card[data-facility="umi-farm"] {
+  border-color: var(--umifarm-color);
+}
+
+.facility-card[data-facility="fureai-lagoon"] {
+  border-color: var(--fureai-color);
+}
+
+
+/* ========================================
+   選択した施設カラーをLABOまで引き継ぐ
+======================================== */
+
+/* アクアミュージアム */
+.facility-theme[data-facility="aquamuseum"] .small-title,
+.facility-theme[data-facility="aquamuseum"] .labo-number {
+  color: var(--aquamuseum-color);
+}
+
+/* ドルフィン ファンタジー */
+.facility-theme[data-facility="dolphin-fantasy"] .small-title,
+.facility-theme[data-facility="dolphin-fantasy"] .labo-number {
+  color: var(--dolphin-color);
+}
+
+/* うみファーム */
+.facility-theme[data-facility="umi-farm"] .small-title,
+.facility-theme[data-facility="umi-farm"] .labo-number {
+  color: var(--umifarm-color);
+}
+
+/* ふれあいラグーン */
+.facility-theme[data-facility="fureai-lagoon"] .small-title,
+.facility-theme[data-facility="fureai-lagoon"] .labo-number {
+  color: var(--fureai-color);
+}
+
+.facility-theme[data-facility="aquamuseum"] .labo-number {
+  background: rgba(139, 95, 199, 0.12);
+}
+
+.facility-theme[data-facility="dolphin-fantasy"] .labo-number {
+  background: rgba(47, 157, 226, 0.12);
+}
+
+.facility-theme[data-facility="umi-farm"] .labo-number {
+  background: rgba(23, 106, 156, 0.12);
+}
+
+.facility-theme[data-facility="fureai-lagoon"] .labo-number {
+  background: rgba(88, 169, 107, 0.12);
+
+
+/* ========================================
+   LABO・展示エリアも施設カラーで囲む
+======================================== */
+
+.facility-theme[data-facility="aquamuseum"] .labo-card {
+  border: 2px solid var(--aquamuseum-color);
+}
+
+.facility-theme[data-facility="dolphin-fantasy"] .labo-card {
+  border: 2px solid var(--dolphin-color);
+}
+
+.facility-theme[data-facility="umi-farm"] .labo-card {
+  border: 2px solid var(--umifarm-color);
+}
+
+.facility-theme[data-facility="fureai-lagoon"] .labo-card {
+  border: 2px solid var(--fureai-color);
+}
+}
+
+
+
+/* ========================================
+   生きもの一覧画面
+   プレート以外を中央寄せ
+======================================== */
+
+.fish-list-header {
+  justify-content: center;
+  text-align: center;
+}
+
+.fish-list-header > div {
+  width: 100%;
+}
+
+
+/* ホームに戻る */
+.fish-list-main .back-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+
+/* 検索欄の文字 */
+.fish-list-main .search-box input {
+  text-align: center;
+}
+
+
+/* AIについての注釈 */
+.fish-list-main .ai-note {
+  text-align: center;
+}
+
+/* 生きもの一覧：「ホームに戻る」だけ左寄せ */
+.fish-list-main .back-button {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+}
+
+
+/* 検索欄の文字を左寄せ */
+.home-main .search-box input,
+.fish-list-main .search-box input {
+  text-align: left;
+}
+
+
+/* ========================================
+   施設別 展示エリア画面
+======================================== */
+
+/* 施設名・タイトルを中央 */
+.app-header.facility-theme {
+  justify-content: center;
+  text-align: center;
+}
+
+.app-header.facility-theme > div {
+  width: 100%;
+}
+
+
+/* LABO・AREAカード内の文字を中央 */
+.labo-list.facility-theme .labo-info {
+  flex: 1;
+  text-align: center;
+}
+
+.labo-list.facility-theme .labo-info strong,
+.labo-list.facility-theme .labo-info small {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* ==============================
+   アクアミュージアム：紫
+============================== */
+
+.labo-list[data-facility="aquamuseum"] .labo-card {
+  border: 2px solid #8b5fc7;
+}
+
+
+/* ==============================
+   ドルフィン ファンタジー：青
+============================== */
+
+.labo-list[data-facility="dolphin-fantasy"] .labo-card {
+  border: 2px solid #2f9de2;
+}
+
+
+/* ==============================
+   うみファーム：濃い青
+============================== */
+
+.labo-list[data-facility="umi-farm"] .labo-card {
+  border: 2px solid #176a9c;
+}
+
+
+/* ==============================
+   ふれあいラグーン：緑
+============================== */
+
+.labo-list[data-facility="fureai-lagoon"] .labo-card {
+  border: 2px solid #58a96b;
+}
+
+/* ========================================
+   八景島公式ホームページへの外部リンク
+======================================== */
+
+.official-site-link {
+  background: #2f7fb8;
+  color: #ffffff;
+}
+
+
+.official-site-link span,
+.official-site-link strong,
+.official-site-link small,
+.official-site-link .arrow {
+  color: #ffffff;
+}
+
+
+/* ホームの2つのメニューボタンを囲む */
+.home-main .place-button,
+.home-main .fish-button {
+  border: 2px solid #17364a;
+}
+
+
+/* 公式ホームページボタンを囲む */
+.official-site-link {
+  border: 2px solid #17364a;
+}
+
+
+/* 施設カードの背景を施設カラーでうっすら色付け */
+
+/* アクアミュージアム：淡い紫 */
+.facility-card[data-facility="aquamuseum"] {
+  background: #f2e8fb;
+}
+
+/* ドルフィン ファンタジー：淡い水色 */
+.facility-card[data-facility="dolphin-fantasy"] {
+  background: #e2f5ff;
+}
+
+/* うみファーム：青灰色 */
+.facility-card[data-facility="umi-farm"] {
+  background: #d8e7f0;
+}
+
+/* ふれあいラグーン：淡い緑 */
+.facility-card[data-facility="fureai-lagoon"] {
+  background: #e5f5e8;
+}
+
+
+/* ========================================
+   「場所から探す」を
+   「生きものから探す」と同じデザインにする
+======================================== */
+
+.home-main .place-button {
+  background: #ffffff;
+  color: #17364a;
+  border: 2px solid #17364a;
+  box-shadow: 0 8px 25px rgba(40, 90, 120, 0.08);
+}
+
+.home-main .place-button .button-icon {
+  background: var(--light-blue);
+}
+
+.home-main .place-button .button-text span,
+.home-main .place-button .button-text strong,
+.home-main .place-button .button-text small,
+.home-main .place-button .arrow {
+  color: #17364a;
+}
+
+/* ========================================
+   ホーム3ボタンの左アイコンをなくす
+======================================== */
+
+/* 左アイコンを非表示 */
+.home-main .place-button .button-icon,
+.home-main .fish-button .button-icon,
+.home-main .official-site-link .button-icon {
+  display: none;
+}
+
+/* アイコン用の列も削除 */
+.home-main .place-button,
+.home-main .fish-button,
+.home-main .official-site-link {
+  grid-template-columns: 1fr 25px;
+}
+
+/* ホームのメインボタンを立体的に */
+.home-main .place-button,
+.home-main .fish-button {
+  background: linear-gradient(
+    180deg,
+    #e4f4ff 0%,
+    #cfe9fb 100%
+  );
+
+  border: 2px solid #17364a;
+
+  box-shadow:
+    0 5px 0 #abcce1,
+    0 10px 20px rgba(40, 90, 120, 0.14);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* 押した時に少し沈む */
+.home-main .place-button:active,
+.home-main .fish-button:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 #abcce1,
+    0 5px 10px rgba(40, 90, 120, 0.12);
+}
+
+
+/* LABO番号と展示場所名を横並び */
+.area-page-title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.area-page-name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   施設カードをボタンらしくする
+======================================== */
+
+.facility-card {
+  box-shadow:
+    0 5px 0 rgba(23, 54, 74, 0.20),
+    0 10px 20px rgba(40, 90, 120, 0.14);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.facility-card:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.20),
+    0 5px 10px rgba(40, 90, 120, 0.12);
+}
+
+
+/* ========================================
+   公式ホームページボタンも立体化
+======================================== */
+
+.official-site-link {
+  box-shadow:
+    0 5px 0 #245f87,
+    0 10px 20px rgba(40, 90, 120, 0.18);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.official-site-link:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 #245f87,
+    0 5px 10px rgba(40, 90, 120, 0.14);
+}
+
+
+/* ========================================
+   LABO・展示エリアカードをボタンらしくする
+======================================== */
+
+.labo-card {
+  box-shadow:
+    0 5px 0 rgba(23, 54, 74, 0.18),
+    0 10px 20px rgba(40, 90, 120, 0.12);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.labo-card:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.18),
+    0 5px 10px rgba(40, 90, 120, 0.10);
+}
+
+/* ========================================
+   写真タップ拡大
+======================================== */
+
+.fish-detail-image img {
+  cursor: zoom-in;
+}
+
+.image-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(0, 0, 0, 0.88);
+}
+
+.image-zoom-overlay img {
+  max-width: 100%;
+  max-height: 90vh;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+}
+
+.image-zoom-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 44px;
+  height: 44px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  color: #17364a;
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+/* 公式サイト案内の上に区切り線 */
+.official-link-section {
+  border-top: 2px dashed #aebfca;
+  padding-top: 30px;
+  margin-top: 30px;
+}
+
+
+/* ========================================
+   ホームタイトルを帯にする
+======================================== */
+
+.home-header h1 {
+  display: block;
+
+  width: 100%;
+
+  margin: 10px 0 0;
+  padding: 16px 12px;
+
+  background: #b9dff5;
+  color: #17364a;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+
+  font-size: 34px;
+  font-weight: 800;
+}
+
+/* ========================================
+   ホームタイトル全体を1本の帯にする
+======================================== */
+
+.home-header > div {
+  width: 100%;
+
+  padding: 15px 16px 18px;
+
+  background: #b9dff5;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+/* 英語タイトル */
+.home-header .small-title {
+  margin: 0 0 7px;
+
+  padding: 0;
+  background: transparent;
+
+  color: #369df5;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+
+/* 八景島水族館図鑑 */
+.home-header h1 {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: #17364a;
+
+  text-align: center;
+}
+
+
+
+/* ========================================
+   水族館・生きもの一覧のタイトル帯
+======================================== */
+
+.location-header > div,
+.fish-list-header > div {
+  width: 100%;
+
+  padding: 15px 16px 18px;
+
+  background: #b9dff5;
+
+  border: none;
+  border-radius: 4px;
+
+  box-shadow: none;
+
+  text-align: center;
+}
+
+
+/* 上の英語 */
+.location-header .small-title,
+.fish-list-header .small-title {
+  margin: 0 0 7px;
+
+  padding: 0;
+  background: transparent;
+
+  color: #369df5;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+
+/* 日本語タイトル */
+.location-header h1,
+.fish-list-header h1 {
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  color: #17364a;
+
+  text-align: center;
+}
+
+/* 生きもの詳細ページ */
+.creature-detail-header > div {
+  width: 100%;
+}
+
+.creature-detail-name {
+  width: 100%;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+/* ========================================
+   生きもの詳細ページ
+   説明カード間の水色をなくす
+======================================== */
+
+.creature-detail-main {
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding-top: 18px;
+}
+
+/* 説明カード同士は少し間隔を空ける */
+.creature-detail-main .feature-section {
+  margin-top: 20px;
+  border: 1px solid #e2edf4;
+  box-shadow: 0 6px 16px rgba(40, 90, 120, 0.08);
+}
+
+
+
+/* 生きもの詳細ページの説明を中央寄せ */
+.creature-detail-main .feature-section {
+  text-align: center;
+}
+
+.creature-detail-main .feature-section h2,
+.creature-detail-main .feature-section p {
+  text-align: center;
+}
+
+
+
+
+
+
+/* ========================================
+   各ページのタイトル帯をやめて下線に統一
+======================================== */
+
+/* 帯の背景をすべて消す */
+.home-header > div,
+.location-header > div,
+.fish-list-header > div,
+.app-header.facility-theme > div {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+
+/* タイトル自体の背景も消す */
+.home-header h1,
+.location-header h1,
+.fish-list-header h1,
+.app-header.facility-theme h1 {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  width: 72%;
+  max-width: 420px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 0 0 14px;
+
+  border-bottom: 2px solid #8eb3c9;
+
+  text-align: center;
+}
+
+/* ========================================
+   生きもの一覧カード
+======================================== */
+.creature-card {
+  min-height: 128px;
+  padding: 12px 16px 12px 12px;
+
+grid-template-columns: 120px 1fr 24px;
+  gap: 16px;
+
+  align-items: center;
+}
+
+
+
+/* 写真 */
+.creature-card .fish-list-image {
+  width: 120px;
+  height: 100px;
+
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.creature-card .fish-list-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* 名前＋特徴 */
+.creature-card .button-text {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* 生きもの名 */
+.creature-card .button-text strong {
+  display: block;
+  width: 100%;
+
+  margin: 0;
+
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  text-align: center;
+
+  color: #083451;
+}
+
+/* 興味を引く一言 */
+.creature-card .creature-card-feature {
+  display: -webkit-box;
+  width: 100%;
+
+  margin-top: 7px;
+
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 600;
+
+  color: #526f82;
+
+  text-align: center;
+
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* 矢印 */
+.creature-card .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+}
+
+
+/* 生きもの一覧カードを枠線で囲う */
+.creature-card {
+  border: 2px solid #17364a;
+}
+
+
+/* 生きもの一覧カードをボタンっぽくする */
+.creature-card {
+  border: 2px solid #17364a;
+
+  box-shadow:
+    0 5px 0 rgba(23, 54, 74, 0.22),
+    0 10px 18px rgba(40, 90, 120, 0.12);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.creature-card:active {
+  transform: translateY(4px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.22),
+    0 5px 10px rgba(40, 90, 120, 0.10);
+}
+
+/* 特徴文をもう少し目立たせる */
+.creature-card .creature-card-feature {
+  font-size: 16px;
+  font-weight: 700;
+  color: #526f82;
+}
+
+/* ========================================
+   生きものカード 注目バッジ
+======================================== */
+
+.creature-card-feature-row {
+  width: 100%;
+  margin-top: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  flex-wrap: nowrap;
+}
+
+
+/* 注目バッジ */
+.creature-card-badge {
+  flex-shrink: 0;
+
+  padding: 3px 8px;
+
+  border-radius: 999px;
+
+  background: #ef6a6a;
+  color: #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  line-height: 1.3;
+}
+
+
+/* 特徴文 */
+.creature-card .creature-card-feature {
+  width: auto;
+  max-width: calc(100% - 55px);
+
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 700;
+
+  color: #526f82;
+
+  text-align: left;
+}
+
+
+
+
+
+
+/* ========================================
+   公式ホームページボタン 光沢
+======================================== */
+
+.official-site-link {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #4aa5dc 0%,
+      #3389bd 48%,
+      #2f7fb8 100%
+    );
+
+  border: 2px solid #17364a;
+
+  box-shadow:
+    0 6px 0 #245f87,
+    0 12px 22px rgba(23, 54, 74, 0.22);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* 上側の光沢 */
+.official-site-link::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 48%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+
+/* 文字を光沢より前に出す */
+.official-site-link .button-text,
+.official-site-link .arrow {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 押したとき */
+.official-site-link:active {
+  transform: translateY(5px);
+
+  box-shadow:
+    0 1px 0 #245f87,
+    0 5px 10px rgba(23, 54, 74, 0.16);
+}
+
+
+/* ========================================
+   施設選択ボタン 光沢・立体感
+======================================== */
+
+.facility-card {
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 6px 0 rgba(23, 54, 74, 0.22),
+    0 12px 20px rgba(23, 54, 74, 0.16);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* 上半分に光沢 */
+.facility-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 48%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.42),
+    rgba(255, 255, 255, 0.06)
+  );
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+
+/* 文字・矢印を光沢より前に */
+.facility-card .button-text,
+.facility-card .arrow {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 押したときに沈む */
+.facility-card:active {
+  transform: translateY(5px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.22),
+    0 5px 10px rgba(23, 54, 74, 0.12);
+}
+
+
+/* ========================================
+   LABOカード 光沢・立体感
+======================================== */
+
+.labo-card {
+  position: relative;
+  overflow: hidden;
+
+  box-shadow:
+    0 6px 0 rgba(23, 54, 74, 0.20),
+    0 12px 20px rgba(23, 54, 74, 0.14);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* 上半分に光沢 */
+.labo-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 48%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.42),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  border-radius: inherit;
+
+  pointer-events: none;
+}
+
+
+/* 文字や矢印を光沢より前に */
+.labo-card .labo-number,
+.labo-card .labo-info,
+.labo-card .arrow {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 押したときに沈む */
+.labo-card:active {
+  transform: translateY(5px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.20),
+    0 5px 10px rgba(23, 54, 74, 0.10);
+}
+
+
+
+
+/* 施設名を大きくする */
+.facility-card .button-text strong {
+  width: 100%;
+
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  text-align: center;
+
+  color: #083451;
+}
+.facility-card .button-text small {
+  display: block;
+  width: 100%;
+
+  margin-top: 6px;
+
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 500;
+
+  color: #60798a;
+
+  text-align: center;
+}
+
+/* ========================================
+   施設カード 文字を完全中央に
+======================================== */
+
+.facility-card {
+  position: relative;
+}
+
+
+/* 文字エリアをカード全体の幅にする */
+.facility-card .button-text {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* 施設名 */
+.facility-card .button-text strong {
+  width: 100%;
+
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  text-align: center;
+}
+
+
+/* 「ここにいる生きものを見る」 */
+.facility-card .button-text small {
+  width: 100%;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 500;
+
+  text-align: center;
+
+  color: #708795;
+}
+
+
+/* 矢印だけ右端に固定 */
+.facility-card .arrow {
+  position: absolute;
+
+  right: 28px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 2;
+}
+
+/* ========================================
+   施設名をカードの上下ど真ん中に
+======================================== */
+
+.facility-card .button-text {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  text-align: center;
+}
+
+
+/* 施設名をカードの完全中央へ */
+.facility-card .button-text strong {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 80%;
+
+  transform: translate(-50%, -50%);
+
+  margin: 0;
+
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  text-align: center;
+
+  color: #083451;
+}
+
+
+/* 説明文だけ施設名の下へ */
+.facility-card .button-text small {
+  position: absolute;
+
+  top: calc(50% + 24px);
+  left: 50%;
+
+  width: 80%;
+
+  transform: translateX(-50%);
+
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+
+  text-align: center;
+
+  color: #708795;
+}
+
+
+
+/* ========================================
+   下メニューを3つの独立ボタンにする
+======================================== */
+
+footer {
+  background: transparent;
+  border-top: none;
+  box-shadow: none;
+
+  padding: 10px 12px 14px;
+
+  gap: 10px;
+}
+
+
+/* 3つのボタン */
+footer button {
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1.5px solid rgba(23, 54, 74, 0.22);
+  border-radius: 16px;
+
+  margin: 0;
+
+  box-shadow:
+    0 4px 0 rgba(23, 54, 74, 0.14),
+    0 8px 16px rgba(23, 54, 74, 0.10);
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+
+/* 押したとき */
+footer button:active {
+  transform: translateY(3px);
+
+  box-shadow:
+    0 1px 0 rgba(23, 54, 74, 0.14),
+    0 4px 8px rgba(23, 54, 74, 0.08);
+}
+
+
+/* 選択中のボタン */
+footer button.active-footer {
+  background: rgba(226, 244, 255, 0.96);
+
+  border-color: #349df4;
+
+  box-shadow:
+    0 4px 0 rgba(52, 157, 244, 0.22),
+    0 8px 16px rgba(23, 54, 74, 0.10);
+}
+
+/* ========================================
+   八景島水族館図鑑
+   ミニマル・バブル背景 完成版
+======================================== */
+
+body {
+  background-color: var(--background);
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 620 1600'%3E%3Cg fill='%23ffffff' fill-opacity='.10' stroke='%23579ab3' stroke-width='4'%3E%3Ccircle cx='50' cy='90' r='20'/%3E%3Ccircle cx='150' cy='175' r='11'/%3E%3Ccircle cx='550' cy='135' r='30'/%3E%3Ccircle cx='470' cy='285' r='14'/%3E%3Ccircle cx='80' cy='340' r='34'/%3E%3Ccircle cx='205' cy='455' r='15'/%3E%3Ccircle cx='555' cy='500' r='10'/%3E%3Ccircle cx='315' cy='610' r='44'/%3E%3Ccircle cx='95' cy='720' r='12'/%3E%3Ccircle cx='510' cy='760' r='34'/%3E%3Ccircle cx='230' cy='900' r='25'/%3E%3Ccircle cx='565' cy='965' r='15'/%3E%3Ccircle cx='75' cy='1080' r='38'/%3E%3Ccircle cx='390' cy='1130' r='18'/%3E%3Ccircle cx='520' cy='1280' r='30'/%3E%3Ccircle cx='255' cy='1380' r='14'/%3E%3Ccircle cx='60' cy='1490' r='18'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='.88'%3E%3Ccircle cx='43' cy='83' r='5'/%3E%3Ccircle cx='146' cy='171' r='3'/%3E%3Ccircle cx='540' cy='125' r='7'/%3E%3Ccircle cx='465' cy='280' r='4'/%3E%3Ccircle cx='69' cy='329' r='8'/%3E%3Ccircle cx='200' cy='450' r='4'/%3E%3Ccircle cx='302' cy='596' r='10'/%3E%3Ccircle cx='499' cy='749' r='8'/%3E%3Ccircle cx='222' cy='892' r='6'/%3E%3Ccircle cx='63' cy='1067' r='9'/%3E%3Ccircle cx='510' cy='1270' r='7'/%3E%3C/svg%3E");
+
+  /* 横幅に合わせて自動縮小
+     → スマホでも泡が消えない */
+  background-size: 100% auto;
+
+  /* 縦方向だけ繰り返す */
+  background-repeat: repeat-y;
+
+  background-position: center top;
+
+  /* スクロールと一緒に背景も流れる */
+  background-attachment: scroll;
+}
+
+
+/* ========================================
+   文字の安全地帯
+   泡が文字の後ろへ入らない
+======================================== */
+
+/* 各ページのタイトル */
+.app-header > div {
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--background);
+
+  box-shadow:
+    0 0 0 9px var(--background);
+}
+
+
+/* 全ページの「← ○○へ戻る」 */
+.back-button {
+  position: relative;
+  z-index: 2;
+
+  background-color: var(--background);
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 0 7px var(--background);
+}
+
+
+/* AIについての注意書き */
+.ai-note {
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--background);
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 0 5px var(--background);
+}
+
+
+/* ホーム下部の見出し */
+.official-link-section h2 {
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--background);
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 0 7px var(--background);
+}
+
+
+/* 非公式サイトの注意書き */
+.unofficial-notice {
+  position: relative;
+  z-index: 1;
+
+  background-color: var(--background);
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 0 0 5px var(--background);
+}
+
+/* ========================================
+   下3ボタンを最前面に固定
+   後ろのカードへのクリック貫通を防止
+======================================== */
+
+footer {
+  z-index: 9998;
+  pointer-events: auto;
+}
+
+footer button {
+  position: relative;
+  z-index: 9999;
+
+  pointer-events: auto;
+}
+
+
+/* 下メニューの透明な隙間部分も
+   後ろのカードへクリックさせない */
+footer::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: auto;
+}
+
+/* 水族館背景画像 */
 
 body {
   background-image:
@@ -2265,6 +4509,322 @@ body:has(.fish-list-main) {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+
+
+
+
+body {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.15),
+      rgba(230, 239, 244, 0.72)
+    ),
+    url("images/background-aquarium.png");
+
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+/* 生きものから探す画面だけ背景を固定 */
+
+body:has(.fish-list-main) {
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+/* ========================================
+   ページ別 背景画像システム
+======================================== */
+
+
+/* 共通設定 */
+
+body[data-page-bg] {
+  background-color: var(--background);
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /*
+    長いLABO一覧をスクロールしても
+    背景写真は画面いっぱいに維持
+  */
+  background-attachment: fixed;
+}
+
+
+/* ========================================
+   ホーム
+======================================== */
+
+body[data-page-bg="home"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-home.png");
+}
+
+
+/* ========================================
+   アクアミュージアム
+======================================== */
+
+body[data-page-bg="aquamuseum"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-aquamuseum.png");
+}
+
+
+/* ========================================
+   ドルフィン ファンタジー
+======================================== */
+
+body[data-page-bg="dolphin-fantasy"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-dolphin-fantasy.png");
+}
+
+
+/* ========================================
+   うみファーム
+======================================== */
+
+body[data-page-bg="umi-farm"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-umi-farm.png");
+}
+
+
+/* ========================================
+   ふれあいラグーン
+======================================== */
+
+body[data-page-bg="fureai-lagoon"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-fureai-lagoon.png");
+}
+
+
+/* ========================================
+   生きもの詳細ページ
+   背景写真を完全に消す
+======================================== */
+
+body[data-page-bg="none"] {
+  background-color: var(--background);
+  background-image: none;
+  background-attachment: scroll;
+}
+
+
+
+
+/* ========================================
+   背景システム 最終修正版
+   必ず style.css の一番最後に追加
+======================================== */
+
+
+/* ========================================
+   共通背景設定
+======================================== */
+
+body[data-page-bg] {
+  background-color: var(--background);
+
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+/* ========================================
+   ホーム背景
+   以前から使っていた八景島全景画像
+======================================== */
+
+body[data-page-bg="home"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-aquarium.png") !important;
+}
+
+
+/* ========================================
+   アクアミュージアム
+======================================== */
+
+body[data-page-bg="aquamuseum"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-aquamuseum.png") !important;
+}
+
+
+/* ========================================
+   ドルフィン ファンタジー
+======================================== */
+
+body[data-page-bg="dolphin-fantasy"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-dolphin-fantasy.png") !important;
+}
+
+
+/* ========================================
+   うみファーム
+======================================== */
+
+body[data-page-bg="umi-farm"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-umi-farm.png") !important;
+}
+
+
+/* ========================================
+   ふれあいラグーン
+======================================== */
+
+body[data-page-bg="fureai-lagoon"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-fureai-lagoon.png") !important;
+}
+
+
+/* ========================================
+   ホーム背景
+======================================== */
+
+body[data-page-bg="home"] {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-home.png") !important;
+}
+
+/* ========================================
+   施設ページ上部タイトル
+   背景写真を文字の後ろに透過させない
+======================================== */
+
+.app-header.facility-theme > div {
+  width: calc(100% - 30px);
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 14px 18px 16px !important;
+
+  background: var(--background) !important;
+
+  border-radius: 14px !important;
+
+  box-shadow:
+    0 3px 12px rgba(23, 54, 74, 0.10) !important;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* タイトル文字そのものは透明背景でOK
+   親のプレートが完全不透明なので写真は透けない */
+
+.app-header.facility-theme h1,
+.app-header.facility-theme .small-title {
+  position: relative;
+  z-index: 3;
+
+  background: transparent !important;
+}
+
+
+/* ========================================
+   ホーム上部も完全不透明にする
+======================================== */
+
+.home-header > div {
+  background: var(--background) !important;
+
+  padding: 14px 18px 16px !important;
+
+  border-radius: 14px !important;
+
+  box-shadow:
+    0 3px 12px rgba(23, 54, 74, 0.10) !important;
+}
+
+
+/* ========================================
+   水族館選択・生きもの検索のタイトルも
+   同じく背景写真を透かさない
+======================================== */
+
+.location-header > div,
+.fish-list-header > div {
+  background: var(--background) !important;
+
+  padding: 14px 18px 16px !important;
+
+  border-radius: 14px !important;
+
+  box-shadow:
+    0 3px 12px rgba(23, 54, 74, 0.10) !important;
+}
+
+
+
+
+
+
+
+
 
 
 

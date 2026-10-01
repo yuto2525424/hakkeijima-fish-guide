@@ -18,6 +18,30 @@ const homeScreen = document.body.innerHTML;
 
 
 // ========================================
+// ページ背景切り替え
+// ========================================
+
+function setPageBackground(backgroundId) {
+
+  const availableBackgrounds = [
+    "home",
+    "aquamuseum",
+    "dolphin-fantasy",
+    "umi-farm",
+    "fureai-lagoon",
+    "none"
+  ];
+
+  document.body.dataset.pageBg =
+    availableBackgrounds.includes(backgroundId)
+      ? backgroundId
+      : "home";
+
+}
+
+
+
+// ========================================
 // 写真提供者
 // 名前が決まるまでは空欄
 // ========================================
@@ -205,6 +229,8 @@ function showHome() {
   document.body.innerHTML =
     homeScreen;
 
+  setPageBackground("home");
+
   setupHome();
 
   window.scrollTo(0, 0);
@@ -218,7 +244,14 @@ function showHome() {
 
 function showFacilities() {
 
+  setPageBackground("home");
+
   let facilityHTML = "";
+
+
+
+
+
 
 
   locationData.facilities.forEach(
@@ -359,6 +392,9 @@ function showFacilityAreas(
   if (!facility) {
     return;
   }
+
+
+setPageBackground(facilityId);
 
 
   let areaHTML = "";
@@ -581,6 +617,11 @@ function showArea(
   ) {
     return;
   }
+
+setPageBackground(facilityId);
+
+
+
 
 
   const fishes =
@@ -897,7 +938,29 @@ function showFishList(
   initialQuery = ""
 ) {
 
+  setPageBackground("home");
+
   document.body.innerHTML = `
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <header class="app-header fish-list-header">
 
@@ -1119,6 +1182,10 @@ function showFishDetail(
   if (!fish) {
     return;
   }
+
+
+
+setPageBackground("none");
 
 
   const classification =
@@ -1736,4 +1803,5 @@ function createFooter(active) {
 // 起動
 // ========================================
 
+setPageBackground("home");
 setupHome();
