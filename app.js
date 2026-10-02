@@ -1351,7 +1351,6 @@ setPageBackground("none");
           💡 面白い豆知識
         </h2>
 
-
         <div class="feature-grid">
 
           ${
@@ -1375,12 +1374,29 @@ setPageBackground("none");
       </section>
 
 
+      ${createTextSection(
+        "名前の由来",
+        fish.nameOrigin
+      )}
+
+
+      ${createTextSection(
+        "八景島で観察するなら",
+        fish.observationPoint
+      )}
+
+
+      ${createTextSection(
+        "人とのかかわり",
+        fish.humanRelation
+      )}
+
+
       <section class="feature-section">
 
         <h2>
           基本情報
         </h2>
-
 
         <div class="feature-grid">
 
@@ -1414,38 +1430,23 @@ setPageBackground("none");
         fish.features
       )}
 
-      ${createTextSection(
-        "生態・行動",
-        fish.behavior
-      )}
 
       ${createTextSection(
         "繁殖",
         fish.reproduction
       )}
 
+
+      ${createTextSection(
+        "生態・行動",
+        fish.behavior
+      )}
+
+
       ${createTextSection(
         "見分け方",
         fish.identification
       )}
-
-      ${createTextSection(
-        "名前の由来",
-        fish.nameOrigin
-      )}
-
-      ${createTextSection(
-        "人との関わり",
-        fish.humanRelation
-      )}
-
-            ${createTextSection(
-        "八景島で観察するなら",
-        fish.observationPoint
-      )}
-
-
-          
 
 
       <section class="feature-section">
@@ -1480,11 +1481,12 @@ setPageBackground("none");
         </p>
 
       </section>
+
+
       ${createReferences(
         fish.references
       )}
 
-      
 
       <section class="feature-section">
 
@@ -1506,7 +1508,14 @@ setPageBackground("none");
 
         </div>
 
-      </section>
+      </section>     
+
+
+
+
+
+
+
 
 
     </main>
