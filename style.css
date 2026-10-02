@@ -4818,9 +4818,166 @@ body[data-page-bg="home"] {
     0 3px 12px rgba(23, 54, 74, 0.10) !important;
 }
 
+/* ========================================
+   背景画像を画面に完全固定
+   スクロールしても背景は動かさない
+======================================== */
+
+/* 写真背景を使うページ */
+body[data-page-bg]:not([data-page-bg="none"]) {
+  position: relative;
+  z-index: 0;
+
+  /* 以前のbody背景を無効化 */
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+
+/* 画面の後ろに固定背景を1枚置く */
+body[data-page-bg]:not([data-page-bg="none"])::before {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(100vw, 620px);
+  height: 100vh;
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  z-index: -1;
+
+  pointer-events: none;
+}
+
+
+/* ========================================
+   ホーム
+======================================== */
+
+body[data-page-bg="home"]::before {  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.28)
+    ),
+    url("images/background-home.png");
+}
+
+/* ========================================
+   アクアミュージアム
+======================================== */
+
+body[data-page-bg="aquamuseum"]::before {
+  background-image:
+    linear-gradient(
+      rgba(230, 239, 244, 0.20),
+      rgba(230, 239, 244, 0.62)
+    ),
+    url("images/background-aquamuseum.png");
+}
+
+
+/* ========================================
+   ドルフィン ファンタジー
+======================================== */
+
+body[data-page-bg="dolphin-fantasy"]::before {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.28)
+    ),
+    url("images/background-dolphin-fantasy.png");
+}
+
+/* ========================================
+   うみファーム
+======================================== */
+
+body[data-page-bg="umi-farm"]::before {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.28)
+    ),
+    url("images/background-umi-farm.png");
+}
+
+
+/* ========================================
+   ふれあいラグーン
+======================================== */
+
+body[data-page-bg="fureai-lagoon"]::before {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.28)
+    ),
+    url("images/background-fureai-lagoon.png");
+}
+
+
+/* ========================================
+   生きもの詳細ページ
+   写真背景なし
+======================================== */
+
+body[data-page-bg="none"] {
+  background-image: none !important;
+  background-color: var(--background) !important;
+}
+
+body[data-page-bg="none"]::before {
+  display: none !important;
+}
 
 
 
+
+
+/* ========================================
+   背景写真の上に白い幕をかける
+======================================== */
+
+body[data-page-bg]:not([data-page-bg="none"]) {
+  isolation: isolate;
+}
+
+
+/* 背景写真を一番後ろへ */
+body[data-page-bg]:not([data-page-bg="none"])::before {
+  z-index: -2 !important;
+}
+
+
+/* 白い半透明の幕 */
+body[data-page-bg]:not([data-page-bg="none"])::after {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(100vw, 620px);
+  height: 100vh;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  z-index: -1;
+
+  pointer-events: none;
+}
 
 
 
