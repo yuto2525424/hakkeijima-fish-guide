@@ -16,6 +16,65 @@ if (typeof fishData === "undefined") {
 
 const homeScreen = document.body.innerHTML;
 
+// ========================================
+// 詳細ページから戻る位置を保存
+// ========================================
+
+let detailReturnState = {
+  scrollY: 0,
+  query: ""
+};
+
+
+function returnFromFishDetail(
+  facilityId = "",
+  areaId = ""
+) {
+
+  const savedScrollY =
+    detailReturnState.scrollY;
+
+  const savedQuery =
+    detailReturnState.query;
+
+
+  if (
+    facilityId &&
+    areaId
+  ) {
+
+    showArea(
+      facilityId,
+      areaId
+    );
+
+  } else {
+
+    showFishList(
+      savedQuery
+    );
+
+  }
+
+
+  requestAnimationFrame(
+    function() {
+
+      requestAnimationFrame(
+        function() {
+
+          window.scrollTo(
+            0,
+            savedScrollY
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
 
 // ========================================
 // ページ背景切り替え
@@ -400,7 +459,30 @@ setPageBackground(facilityId);
   let areaHTML = "";
 
 
-  areas.forEach(
+  const visibleAreas =
+    areas.filter(
+      function(area) {
+
+        return fishData.some(
+          function(fish) {
+
+            return (
+              Array.isArray(
+                fish.areaIds
+              )
+              &&
+              fish.areaIds.includes(
+                area.id
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+    visibleAreas.forEach(
     function(area) {
 
       const fishCount =
@@ -477,7 +559,7 @@ setPageBackground(facilityId);
   );
 
 
-  if (areas.length === 0) {
+   if (visibleAreas.length === 0) {
 
     areaHTML = `
 
@@ -564,7 +646,11 @@ setPageBackground(facilityId);
   `;
 
 
-  window.scrollTo(0, 0);
+   window.scrollTo(0, 0);
+
+
+
+
 
 }
 
@@ -598,7 +684,8 @@ function showLabo(laboId) {
 
 function showArea(
   facilityId,
-  areaId
+  areaId,
+  restoreScrollY = 0
 ) {
 
   const facility =
@@ -718,7 +805,6 @@ setPageBackground(facilityId);
 
 
 
-
       </div>
 
     </header>
@@ -740,17 +826,44 @@ setPageBackground(facilityId);
 
       
 
-      ${fishHTML}
+         ${fishHTML}
 
     </main>
+
+
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      type="button"
+      aria-label="ページ上部へ戻る"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      ↑
+    </button>
 
 
     ${createFooter("place")}
 
   `;
 
-
   window.scrollTo(0, 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -1011,12 +1124,23 @@ function showFishList(
         ※本サイトの生物情報の一部は、文献・公開情報などを参考に、AIを活用して作成・整理しています。正確性の確認に努めていますが、誤りや情報の更新遅れが生じる場合があります。
       </p>
 
-      <div
+           <div
         id="fish-search-results"
       >
       </div>
 
     </main>
+
+
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      type="button"
+      aria-label="ページ上部へ戻る"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      ↑
+    </button>
 
 
     ${createFooter("fish")}
@@ -1056,6 +1180,214 @@ function showFishList(
 // 魚検索
 // ========================================
 
+
+// 検索文字を統一する
+function normalizeSearchText(text) {
+
+  return String(
+    text || ""
+  )
+
+    // 半角文字などを全角相当に統一
+    .normalize("NFKC")
+
+    // 英字を小文字へ
+    .toLowerCase()
+
+    // カタカナをひらがなへ
+    .replace(
+      /[\u30a1-\u30f6]/g,
+      function(character) {
+
+        return String.fromCharCode(
+          character.charCodeAt(0) - 0x60
+        );
+
+      }
+    )
+
+    // 空白を削除
+    .replace(/\s+/g, "");
+
+}
+
+
+// ========================================
+// 文字の違いを数える
+// ========================================
+
+function getSearchDistance(
+  first,
+  second
+) {
+
+  const a =
+    normalizeSearchText(first);
+
+  const b =
+    normalizeSearchText(second);
+
+
+  const rows =
+    a.length + 1;
+
+  const columns =
+    b.length + 1;
+
+
+  const matrix =
+    Array.from(
+      {
+        length: rows
+      },
+      function() {
+
+        return new Array(
+          columns
+        ).fill(0);
+
+      }
+    );
+
+
+  for (
+    let i = 0;
+    i < rows;
+    i++
+  ) {
+
+    matrix[i][0] = i;
+
+  }
+
+
+  for (
+    let j = 0;
+    j < columns;
+    j++
+  ) {
+
+    matrix[0][j] = j;
+
+  }
+
+
+  for (
+    let i = 1;
+    i < rows;
+    i++
+  ) {
+
+    for (
+      let j = 1;
+      j < columns;
+      j++
+    ) {
+
+      const cost =
+        a[i - 1] === b[j - 1]
+          ? 0
+          : 1;
+
+
+      matrix[i][j] =
+        Math.min(
+
+          matrix[i - 1][j] + 1,
+
+          matrix[i][j - 1] + 1,
+
+          matrix[i - 1][j - 1] + cost
+
+        );
+
+    }
+
+  }
+
+
+  return matrix[
+    a.length
+  ][
+    b.length
+  ];
+
+}
+
+
+// ========================================
+// 誤字として許容するか
+// ========================================
+
+function isCloseSearchMatch(
+  keyword,
+  name
+) {
+
+  const normalizedKeyword =
+    normalizeSearchText(
+      keyword
+    );
+
+
+  const normalizedName =
+    normalizeSearchText(
+      name
+    );
+
+
+  // 短い検索語では
+  // 誤字検索を行わない
+  if (
+    normalizedKeyword.length < 3
+  ) {
+
+    return false;
+
+  }
+
+
+  // 長さが大きく違う名前は除外
+  if (
+    Math.abs(
+      normalizedKeyword.length
+      -
+      normalizedName.length
+    ) > 2
+  ) {
+
+    return false;
+
+  }
+
+
+  const distance =
+    getSearchDistance(
+      normalizedKeyword,
+      normalizedName
+    );
+
+
+  // 3〜5文字なら誤字1文字まで
+  if (
+    normalizedKeyword.length <= 5
+  ) {
+
+    return distance <= 1;
+
+  }
+
+
+  // 6文字以上なら誤字2文字まで
+  return distance <= 2;
+
+}
+
+
+// ========================================
+// 検索実行
+// ========================================
+
 function updateFishSearch(query) {
 
   const resultArea =
@@ -1070,9 +1402,9 @@ function updateFishSearch(query) {
 
 
   const keyword =
-    query
-      .trim()
-      .toLowerCase();
+    normalizeSearchText(
+      query.trim()
+    );
 
 
   let fishes =
@@ -1081,45 +1413,76 @@ function updateFishSearch(query) {
 
   if (keyword !== "") {
 
-    fishes =
-      fishData.filter(
-        function(fish) {
+    const exactMatches = [];
 
-          const nameJa =
-            (
-              fish.nameJa
-              || ""
-            ).toLowerCase();
+    const fuzzyMatches = [];
 
 
-          const scientificName =
-            (
-              fish.scientificName
-              || ""
-            ).toLowerCase();
+    fishData.forEach(
+      function(fish) {
+
+        const nameJa =
+          normalizeSearchText(
+            fish.nameJa
+          );
 
 
-          const englishName =
-            (
-              fish.englishName
-              || ""
-            ).toLowerCase();
+        const scientificName =
+          normalizeSearchText(
+            fish.scientificName
+          );
 
 
-          return (
-            nameJa.includes(keyword)
-            ||
-            scientificName.includes(
-              keyword
-            )
-            ||
-            englishName.includes(
-              keyword
-            )
+        const englishName =
+          normalizeSearchText(
+            fish.englishName
+          );
+
+
+        // 通常検索
+        if (
+          nameJa.includes(keyword)
+          ||
+          scientificName.includes(
+            keyword
+          )
+          ||
+          englishName.includes(
+            keyword
+          )
+        ) {
+
+          exactMatches.push(
+            fish
+          );
+
+          return;
+
+        }
+
+
+        // 日本語名のみ誤字検索
+        if (
+          isCloseSearchMatch(
+            keyword,
+            nameJa
+          )
+        ) {
+
+          fuzzyMatches.push(
+            fish
           );
 
         }
-      );
+
+      }
+    );
+
+
+    fishes = [
+      ...exactMatches,
+      ...fuzzyMatches
+    ];
 
   }
 
@@ -1157,8 +1520,6 @@ function updateFishSearch(query) {
     );
 
 }
-
-
 // ========================================
 // 魚詳細
 // ========================================
@@ -1168,6 +1529,26 @@ function showFishDetail(
   fromFacilityId = "",
   fromAreaId = ""
 ) {
+
+  const currentSearchInput =
+    document.getElementById(
+      "fish-search-input"
+    );
+
+
+  detailReturnState = {
+
+    scrollY:
+      window.scrollY,
+
+    query:
+      currentSearchInput
+        ? currentSearchInput.value
+        : ""
+
+  };
+
+
 
   const fish =
     fishData.find(
@@ -1238,8 +1619,8 @@ setPageBackground("none");
   );
 
 
-  let backAction =
-    "showFishList()";
+   let backAction =
+    "returnFromFishDetail()";
 
 
   if (
@@ -1249,12 +1630,13 @@ setPageBackground("none");
   ) {
 
     backAction =
-      `showArea(
+      `returnFromFishDetail(
         '${fromFacilityId}',
         '${fromAreaId}'
       )`;
 
   }
+ 
 
 
   document.body.innerHTML = `
@@ -1342,10 +1724,61 @@ setPageBackground("none");
 
 
     
+      <nav class="detail-mini-nav" aria-label="生きもの詳細メニュー">
+
+        <button
+          type="button"
+          onclick="document.getElementById('detail-trivia').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+        >
+          豆知識
+        </button>
+
+        <button
+          type="button"
+          onclick="document.getElementById('detail-observation').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+        >
+          観察
+        </button>
+
+        <button
+          type="button"
+          onclick="document.getElementById('detail-basic').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+        >
+          基本情報
+        </button>
+
+        <button
+          type="button"
+          onclick="document.getElementById('detail-encyclopedia').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+        >
+          図鑑
+        </button>
+
+      </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    
 
-      <section class="feature-section">
+      <section
+        id="detail-trivia"
+        class="feature-section"
+      >
 
         <h2>
           💡 面白い豆知識
@@ -1379,11 +1812,14 @@ setPageBackground("none");
         fish.nameOrigin
       )}
 
+      <div id="detail-observation">
 
-      ${createTextSection(
-        "八景島で観察するなら",
-        fish.observationPoint
-      )}
+        ${createTextSection(
+          "八景島で観察するなら",
+          fish.observationPoint
+        )}
+
+      </div>
 
 
       ${createTextSection(
@@ -1392,7 +1828,10 @@ setPageBackground("none");
       )}
 
 
-      <section class="feature-section">
+           <section
+        id="detail-basic"
+        class="feature-section"
+      >
 
         <h2>
           基本情報
@@ -1449,36 +1888,47 @@ setPageBackground("none");
       )}
 
 
-      <section class="feature-section">
+           <section
+        id="detail-encyclopedia"
+        class="feature-section"
+      >
 
-        <h2>
-          図鑑データ
-        </h2>
+        <details class="encyclopedia-details">
 
-        <p>
-          <strong>学名：</strong>
-          <i>${escapeHTML(
-            fish.scientificName || "未入力"
-          )}</i>
-        </p>
+          <summary>
+            図鑑データ 3項目
+          </summary>
 
-        <p>
-          <strong>英名：</strong>
-          ${escapeHTML(
-            fish.englishName || "未入力"
-          )}
-        </p>
+          <div class="encyclopedia-content">
 
-        <p>
-          <strong>分類：</strong>
-          ${
-            classification.length > 0
-              ? classification
-                  .map(escapeHTML)
-                  .join(" ＞ ")
-              : "未入力"
-          }
-        </p>
+            <p>
+              <strong>学名：</strong>
+              <i>${escapeHTML(
+                fish.scientificName || "未入力"
+              )}</i>
+            </p>
+
+            <p>
+              <strong>英名：</strong>
+              ${escapeHTML(
+                fish.englishName || "未入力"
+              )}
+            </p>
+
+            <p>
+              <strong>分類：</strong>
+              ${
+                classification.length > 0
+                  ? classification
+                      .map(escapeHTML)
+                      .join(" ＞ ")
+                  : "未入力"
+              }
+            </p>
+
+          </div>
+
+        </details>
 
       </section>
 
@@ -1518,10 +1968,24 @@ setPageBackground("none");
 
 
 
-    </main>
+       </main>
+
+
+    <button
+      id="back-to-top"
+      class="back-to-top"
+      type="button"
+      aria-label="ページ上部へ戻る"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      ↑
+    </button>
 
 
     ${createFooter("fish")}
+
+
+
 
   `;
 
@@ -1616,13 +2080,17 @@ function createReferences(
 
       <section class="feature-section">
 
-        <h2>
-          参考文献
-        </h2>
+        <details class="references-details">
 
-        <p>
-          未入力
-        </p>
+          <summary>
+            参考文献 0件
+          </summary>
+
+          <p>
+            未入力
+          </p>
+
+        </details>
 
       </section>
 
@@ -1655,11 +2123,19 @@ function createReferences(
 
     <section class="feature-section">
 
-      <h2>
-        参考文献
-      </h2>
+      <details class="references-details">
 
-      ${html}
+        <summary>
+          参考文献 ${references.length}件
+        </summary>
+
+        <div class="references-content">
+
+          ${html}
+
+        </div>
+
+      </details>
 
     </section>
 
@@ -1807,6 +2283,40 @@ function createFooter(active) {
 
 }
 
+
+
+// ========================================
+// 上へ戻るボタン
+// ========================================
+
+function updateBackToTopButton() {
+
+  const button =
+    document.getElementById(
+      "back-to-top"
+    );
+
+
+  if (!button) {
+    return;
+  }
+
+
+  button.classList.toggle(
+    "is-visible",
+    window.scrollY > 500
+  );
+
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateBackToTopButton,
+  {
+    passive: true
+  }
+);
 
 // ========================================
 // 起動
