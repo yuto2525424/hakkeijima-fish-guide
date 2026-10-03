@@ -6447,7 +6447,36 @@ a {
 }
 
 
+/* ========================================
+   小さいスマホ
+   長い施設名のはみ出し防止
+======================================== */
 
+@media (max-width: 430px) {
+
+  .facility-card .button-text {
+    min-width: 0;
+  }
+
+  .facility-card[data-facility="dolphin-fantasy"]
+  .button-text strong {
+    white-space: normal;
+
+    font-size:
+      clamp(
+        14px,
+        4.2vw,
+        17px
+      );
+
+    line-height: 1.2;
+
+    text-align: center;
+
+    text-wrap: balance;
+  }
+
+}
 
 
 
