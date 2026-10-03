@@ -828,9 +828,26 @@ setPageBackground(facilityId);
             facility.name
           )}
         </p>
-<h1 class="facility-select-title">
+
+
+
+<h1
+  style="
+    width: 100% !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+    font-size: clamp(20px, 6.4vw, 30px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  "
+>
   ${pageTitle}
 </h1>
+
+
 
 
 
