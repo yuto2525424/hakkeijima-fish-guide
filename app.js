@@ -16,6 +16,97 @@ if (typeof fishData === "undefined") {
 
 const homeScreen = document.body.innerHTML;
 
+
+// ========================================
+// 全ボタン 共通タップフィードバック
+// ========================================
+
+let pressingElement = null;
+
+
+document.addEventListener(
+  "pointerdown",
+  function(event) {
+
+    const target =
+      event.target.closest(
+        "button, a"
+      );
+
+
+    if (!target) {
+      return;
+    }
+
+
+    pressingElement =
+      target;
+
+
+    target.classList.add(
+      "is-pressing"
+    );
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+function releasePressingElement() {
+
+  if (!pressingElement) {
+    return;
+  }
+
+
+  const target =
+    pressingElement;
+
+
+  pressingElement = null;
+
+
+  setTimeout(
+    function() {
+
+      target.classList.remove(
+        "is-pressing"
+      );
+
+    },
+    90
+  );
+
+}
+
+
+document.addEventListener(
+  "pointerup",
+  releasePressingElement,
+  {
+    passive: true
+  }
+);
+
+
+document.addEventListener(
+  "pointercancel",
+  releasePressingElement,
+  {
+    passive: true
+  }
+);
+
+
+
+
+
+
+
+
+
 // ========================================
 // 詳細ページから戻る位置を保存
 // ========================================
@@ -183,6 +274,114 @@ function getAreaCode(area) {
 
 
 // ========================================
+// 詳細ページ「どこにいる？」
+// ========================================
+
+function createDetailLocationGuide(fish) {
+
+  if (
+    !Array.isArray(fish.areaIds)
+    ||
+    fish.areaIds.length === 0
+  ) {
+    return "";
+  }
+
+
+  let locationHTML = "";
+
+
+  locationData.facilities.forEach(
+    function(facility) {
+
+      getAreas(
+        facility.id
+      ).forEach(
+        function(area) {
+
+          if (
+            !fish.areaIds.includes(
+              area.id
+            )
+          ) {
+            return;
+          }
+
+
+          const placeName =
+            facility.id === "aquamuseum"
+
+              ? getAreaCode(area)
+
+              : area.name;
+
+
+          locationHTML += `
+
+            <div class="detail-location-item">
+
+              <strong>
+                ${escapeHTML(
+                  placeName
+                )}
+              </strong>
+
+              <small>
+                ${escapeHTML(
+                  facility.name
+                )}
+              </small>
+
+            </div>
+
+          `;
+
+        }
+      );
+
+    }
+  );
+
+
+  if (locationHTML === "") {
+    return "";
+  }
+
+
+  return `
+
+    <div class="detail-location-guide">
+
+      <div class="detail-location-guide-title">
+
+       
+        <span>
+          どこにいる？
+        </span>
+
+      </div>
+
+      <div class="detail-location-list">
+
+        ${locationHTML}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+
+
+
+
+
+
+
+// ========================================
 // ホーム
 // ========================================
 
@@ -314,9 +513,13 @@ function showFacilities() {
 
 
   locationData.facilities.forEach(
-    function(facility) {
+  function(facility) {
 
-      facilityHTML += `
+    const facilityImage =
+      `images/background-${facility.id}.png`;
+
+    facilityHTML += `
+
 
       <button
   class="main-button fish-button facility-card"
@@ -327,7 +530,18 @@ function showFacilities() {
     )
   "
 >
+<div class="facility-card-image">
 
+  <img
+    src="${facilityImage}"
+    alt="${escapeHTML(
+      facility.name
+    )}"
+    loading="lazy"
+    decoding="async"
+  >
+
+</div>
          
 
 
@@ -677,6 +891,183 @@ function showLabo(laboId) {
 
 }
 
+// ========================================
+// 前・次のLABO / エリア
+// ========================================
+
+function createAreaNavigation(
+  facilityId,
+  areaId
+) {
+
+  const areas =
+    getAreas(
+      facilityId
+    );
+
+
+  // 生きものが登録されている場所だけ
+  const visibleAreas =
+    areas.filter(
+      function(area) {
+
+        return fishData.some(
+          function(fish) {
+
+            return (
+              Array.isArray(
+                fish.areaIds
+              )
+              &&
+              fish.areaIds.includes(
+                area.id
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  const currentIndex =
+    visibleAreas.findIndex(
+      function(area) {
+        return area.id === areaId;
+      }
+    );
+
+
+  if (currentIndex === -1) {
+    return "";
+  }
+
+
+  const previousArea =
+    currentIndex > 0
+      ? visibleAreas[
+          currentIndex - 1
+        ]
+      : null;
+
+
+  const nextArea =
+    currentIndex <
+    visibleAreas.length - 1
+      ? visibleAreas[
+          currentIndex + 1
+        ]
+      : null;
+
+
+  const areaLabel =
+    facilityId === "aquamuseum"
+      ? "LABO"
+      : "エリア";
+
+
+  let buttonsHTML = "";
+
+
+  if (previousArea) {
+
+    buttonsHTML += `
+
+      <button
+        class="
+          area-sequence-button
+          area-sequence-prev
+        "
+        type="button"
+        onclick="
+          showArea(
+            '${facilityId}',
+            '${previousArea.id}'
+          )
+        "
+      >
+        ← 前の${areaLabel}へ
+      </button>
+
+    `;
+
+  }
+
+
+  if (nextArea) {
+
+    buttonsHTML += `
+
+      <button
+        class="
+          area-sequence-button
+          area-sequence-next
+        "
+        type="button"
+        onclick="
+          showArea(
+            '${facilityId}',
+            '${nextArea.id}'
+          )
+        "
+      >
+        次の${areaLabel}へ →
+      </button>
+
+    `;
+
+  }
+
+
+  let endHTML = "";
+
+
+  if (!nextArea) {
+
+    endHTML = `
+
+      <div class="area-sequence-end">
+
+        <p>
+          この施設の展示エリアはここまで
+        </p>
+
+        <button
+          type="button"
+          onclick="showFacilities()"
+        >
+          他の施設を見る →
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  return `
+
+    <section
+      class="area-sequence-nav"
+      aria-label="展示エリアの移動"
+    >
+
+      <div class="area-sequence-buttons">
+
+        ${buttonsHTML}
+
+      </div>
+
+      ${endHTML}
+
+    </section>
+
+  `;
+
+}
+
 
 // ========================================
 // 展示エリア内の生きもの
@@ -757,7 +1148,7 @@ setPageBackground(facilityId);
 
   }
 
-  else {
+   else {
 
     fishHTML =
       createFishCards(
@@ -767,6 +1158,13 @@ setPageBackground(facilityId);
       );
 
   }
+
+
+  const areaNavigationHTML =
+    createAreaNavigation(
+      facilityId,
+      areaId
+    );
 
 
   document.body.innerHTML = `
@@ -826,13 +1224,21 @@ setPageBackground(facilityId);
 
       
 
-         ${fishHTML}
+             ${fishHTML}
+
+
+         ${areaNavigationHTML}
+
 
     </main>
 
 
     <button
       id="back-to-top"
+
+
+
+
       class="back-to-top"
       type="button"
       aria-label="ページ上部へ戻る"
@@ -1519,6 +1925,67 @@ function updateFishSearch(query) {
       fishes
     );
 
+  animateSearchResults(
+    resultArea
+  );
+
+// ========================================
+// 検索結果を滑らかに表示
+// ========================================
+
+function animateSearchResults(
+  resultArea
+) {
+
+  resultArea
+    .getAnimations()
+    .forEach(
+      function(animation) {
+        animation.cancel();
+      }
+    );
+
+
+  resultArea.animate(
+    [
+      {
+        opacity: 0.35,
+        transform: "translateY(5px)"
+      },
+
+      {
+        opacity: 1,
+        transform: "translateY(0)"
+      }
+    ],
+    {
+      duration: 160,
+      easing: "ease-out"
+    }
+  );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 // ========================================
 // 魚詳細
@@ -1559,17 +2026,23 @@ function showFishDetail(
       }
     );
 
-
   if (!fish) {
     return;
   }
 
 
 
-setPageBackground("none");
+  setPageBackground("none");
+
+
+  const detailLocationHTML =
+    createDetailLocationGuide(
+      fish
+    );
 
 
   const classification =
+
     Array.isArray(
       fish.classification
     )
@@ -1652,11 +2125,15 @@ setPageBackground("none");
       ← 一覧へ戻る
     </button>
 
-    <h1 class="creature-detail-name">
+  <h1 class="creature-detail-name">
   ${escapeHTML(
     fish.nameJa
   )}
 </h1>
+
+
+${detailLocationHTML}
+
 
   </div>
 
