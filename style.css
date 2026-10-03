@@ -6649,3 +6649,33 @@ a {
 
 }
 
+/* ========================================
+   ホームタイトル
+   スマホで1行固定
+======================================== */
+
+.home-header h1 {
+  width: 100% !important;
+  max-width: none !important;
+
+  white-space: nowrap;
+
+  font-size:
+    clamp(
+      25px,
+      7.8vw,
+      34px
+    );
+
+  line-height: 1.15;
+
+  letter-spacing: -0.03em;
+
+  text-align: center;
+}]
+
+
+
+
+
+
