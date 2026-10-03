@@ -566,10 +566,19 @@ function showFacilities() {
      <div class="button-text">
 
   <strong>
-    ${escapeHTML(
-      facility.name
-    )}
-  </strong>
+  ${
+    facility.id === "dolphin-fantasy"
+      ? `
+        ドルフィン
+        <span class="dolphin-desktop-space"> </span>
+        <br class="dolphin-mobile-break">
+        ファンタジー
+      `
+      : escapeHTML(
+          facility.name
+        )
+  }
+</strong>
 
   <small>
   ここにいる生きものを見る
