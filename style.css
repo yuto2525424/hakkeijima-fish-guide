@@ -6676,6 +6676,34 @@ a {
 
 
 
+/* ========================================
+   施設内「展示エリアを選ぶ」
+   スマホでも1行表示
+======================================== */
 
+.app-header.facility-theme
+.facility-select-title {
+
+  width: 96% !important;
+  max-width: none !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  white-space: nowrap !important;
+
+  font-size:
+    clamp(
+      22px,
+      7vw,
+      32px
+    ) !important;
+
+  line-height: 1.15 !important;
+
+  letter-spacing: -0.03em !important;
+
+  text-align: center !important;
+}
 
 

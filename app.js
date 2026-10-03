@@ -828,10 +828,12 @@ setPageBackground(facilityId);
             facility.name
           )}
         </p>
+<h1 class="facility-select-title">
+  ${pageTitle}
+</h1>
 
-        <h1>
-          ${pageTitle}
-        </h1>
+
+
 
       </div>
 
