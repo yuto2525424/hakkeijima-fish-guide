@@ -6602,108 +6602,28 @@ a {
 
 
 
-
-
-
 /* ========================================
-   ドルフィンファンタジー
+   4施設
    小型スマホでは確実に2行
 ======================================== */
 
-.dolphin-mobile-break {
+.facility-mobile-break {
   display: none;
 }
 
-.dolphin-desktop-space {
+.facility-desktop-space {
   display: inline;
 }
 
 
 @media (max-width: 430px) {
 
-  .dolphin-mobile-break {
+  .facility-mobile-break {
     display: block;
   }
 
-  .dolphin-desktop-space {
+  .facility-desktop-space {
     display: none;
   }
 
-
-  .facility-card[data-facility="dolphin-fantasy"]
-  .button-text strong {
-
-    font-size:
-      clamp(
-        15px,
-        4.5vw,
-        17px
-      );
-
-    line-height: 1.15;
-
-    white-space: normal !important;
-
-    text-align: center;
-  }
-
 }
-
-/* ========================================
-   ホームタイトル
-   スマホで1行固定
-======================================== */
-
-.home-header h1 {
-  width: 100% !important;
-  max-width: none !important;
-
-  white-space: nowrap;
-
-  font-size:
-    clamp(
-      25px,
-      7.8vw,
-      34px
-    );
-
-  line-height: 1.15;
-
-  letter-spacing: -0.03em;
-
-  text-align: center;
-}]
-
-
-
-/* ========================================
-   施設内「展示エリアを選ぶ」
-   スマホでも1行表示
-======================================== */
-
-.app-header.facility-theme
-.facility-select-title {
-
-  width: 96% !important;
-  max-width: none !important;
-
-  margin-left: auto !important;
-  margin-right: auto !important;
-
-  white-space: nowrap !important;
-
-  font-size:
-    clamp(
-      22px,
-      7vw,
-      32px
-    ) !important;
-
-  line-height: 1.15 !important;
-
-  letter-spacing: -0.03em !important;
-
-  text-align: center !important;
-}
-
-

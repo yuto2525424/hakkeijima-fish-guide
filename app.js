@@ -518,6 +518,20 @@ function showFacilities() {
     const facilityImage =
       `images/background-${facility.id}.png`;
 
+const facilityTitleHtml = {
+  "aquamuseum":
+    'アクア<br class="facility-mobile-break">ミュージアム',
+
+  "dolphin-fantasy":
+    'ドルフィン<span class="facility-desktop-space"> </span><br class="facility-mobile-break">ファンタジー',
+
+  "umi-farm":
+    'うみ<br class="facility-mobile-break">ファーム',
+
+  "fureai-lagoon":
+    'ふれあい<br class="facility-mobile-break">ラグーン'
+}[facility.id] || escapeHTML(facility.name);
+
     facilityHTML += `
 
 
@@ -562,27 +576,15 @@ function showFacilities() {
 
 
 
-
-     <div class="button-text">
+<div class="button-text">
 
   <strong>
-  ${
-    facility.id === "dolphin-fantasy"
-      ? `
-        ドルフィン
-        <span class="dolphin-desktop-space"> </span>
-        <br class="dolphin-mobile-break">
-        ファンタジー
-      `
-      : escapeHTML(
-          facility.name
-        )
-  }
-</strong>
+    ${facilityTitleHtml}
+  </strong>
 
   <small>
-  ここにいる生きものを見る
-</small>
+    ここにいる生きものを見る
+  </small>
 
 </div>
 
@@ -828,26 +830,9 @@ setPageBackground(facilityId);
             facility.name
           )}
         </p>
-
-
-
-<h1
-  style="
-    width: 100% !important;
-    max-width: none !important;
-    white-space: nowrap !important;
-    font-size: clamp(20px, 6.4vw, 30px) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.03em !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    text-align: center !important;
-  "
->
+<h1 class="facility-select-title">
   ${pageTitle}
 </h1>
-
-
 
 
 
