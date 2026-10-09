@@ -7920,6 +7920,479 @@ a {
 
 }
 
+/* ========================================
+   施設全体 発見率バー
+======================================== */
+
+.facility-discovery-summary {
+
+  width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  margin:
+    14px
+    0
+    20px;
+
+  padding:
+    14px
+    18px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.92
+    );
+
+  box-shadow:
+    0 4px 14px
+    rgba(23,54,74,.12);
+
+}
+
+
+.facility-discovery-head {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 9px;
+
+  color: #17364a;
+
+}
+
+
+.facility-discovery-count {
+
+  min-width: 0;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+}
+
+
+.facility-discovery-heart {
+
+  margin-right: 4px;
+
+  color: #ef6680;
+
+}
+
+
+.facility-discovery-percent {
+
+  flex: 0 0 auto;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+}
+
+
+/* バーの背景 */
+
+.facility-discovery-track {
+
+  width: 100%;
+  height: 13px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e4edf2;
+
+}
+
+
+/* 発見した部分 */
+
+.facility-discovery-fill {
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition:
+    width .35s ease;
+
+}
+
+
+/* アクアミュージアム */
+
+.facility-discovery-summary
+[data-facility="aquamuseum"] {
+}
+
+
+.facility-discovery-summary[data-facility="aquamuseum"]
+.facility-discovery-fill {
+
+  background: #8b5fc7;
+
+}
+
+
+/* ドルフィンファンタジー */
+
+.facility-discovery-summary[data-facility="dolphin-fantasy"]
+.facility-discovery-fill {
+
+  background: #2f9de2;
+
+}
+
+
+/* うみファーム */
+
+.facility-discovery-summary[data-facility="umi-farm"]
+.facility-discovery-fill {
+
+  background: #176a9c;
+
+}
+
+
+/* ふれあいラグーン */
+
+.facility-discovery-summary[data-facility="fureai-lagoon"]
+.facility-discovery-fill {
+
+  background: #58a96b;
+
+}
+
+
+/* ========================================
+   小さいスマホ
+======================================== */
+
+@media (max-width: 430px) {
+
+  .facility-discovery-summary {
+
+    margin:
+      10px
+      0
+      15px;
+
+    padding:
+      11px
+      13px;
+
+    border-radius: 15px;
+  }
+
+
+  .facility-discovery-head {
+
+    gap: 8px;
+
+    margin-bottom: 7px;
+  }
+
+
+  .facility-discovery-count {
+
+    font-size:
+      clamp(
+        10px,
+        3vw,
+        12px
+      );
+  }
+
+
+  .facility-discovery-percent {
+
+    font-size:
+      clamp(
+        11px,
+        3.3vw,
+        14px
+      );
+  }
+
+
+  .facility-discovery-track {
+
+    height: 10px;
+  }
+
+}
+
+
+/* ========================================
+   LABO・展示エリア
+   発見率バー
+======================================== */
+
+.area-discovery-summary {
+
+  width: 100%;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  margin:
+    14px
+    0
+    20px;
+
+  padding:
+    14px
+    18px;
+
+  border-radius: 18px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  box-shadow:
+    0 4px 14px
+    rgba(23,54,74,.12);
+
+}
+
+
+.area-discovery-head {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 9px;
+
+  color: #17364a;
+
+}
+
+
+.area-discovery-count {
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+}
+
+
+.area-discovery-heart {
+
+  margin-right: 4px;
+
+  color: #ef6680;
+
+}
+
+
+.area-discovery-percent {
+
+  flex: 0 0 auto;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+}
+
+
+/* バー背景 */
+
+.area-discovery-track {
+
+  width: 100%;
+  height: 13px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #e4edf2;
+
+}
+
+
+/* 発見済み部分 */
+
+.area-discovery-fill {
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition:
+    width .35s ease;
+
+}
+
+
+/* アクアミュージアム */
+
+.area-discovery-summary[data-facility="aquamuseum"]
+.area-discovery-fill {
+
+  background: #8b5fc7;
+
+}
+
+
+/* ドルフィンファンタジー */
+
+.area-discovery-summary[data-facility="dolphin-fantasy"]
+.area-discovery-fill {
+
+  background: #2f9de2;
+
+}
+
+
+/* うみファーム */
+
+.area-discovery-summary[data-facility="umi-farm"]
+.area-discovery-fill {
+
+  background: #176a9c;
+
+}
+
+
+/* ふれあいラグーン */
+
+.area-discovery-summary[data-facility="fureai-lagoon"]
+.area-discovery-fill {
+
+  background: #58a96b;
+
+}
+
+
+/* ========================================
+   小さいスマホ
+======================================== */
+
+@media (max-width: 430px) {
+
+  .area-discovery-summary {
+
+    margin:
+      10px
+      0
+      15px;
+
+    padding:
+      11px
+      13px;
+
+    border-radius: 15px;
+
+  }
+
+
+  .area-discovery-count {
+
+    font-size:
+      clamp(
+        10px,
+        3vw,
+        12px
+      );
+
+  }
+
+
+  .area-discovery-percent {
+
+    font-size:
+      clamp(
+        11px,
+        3.3vw,
+        14px
+      );
+
+  }
+
+
+  .area-discovery-track {
+
+    height: 10px;
+
+  }
+
+}
+
+/* ========================================
+   見た！ラベル
+======================================== */
+
+.creature-found-wrap,
+.detail-found-wrap {
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+
+}
+
+
+.creature-found-label,
+.detail-found-label {
+
+  color: #60798a;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+}
+
+
+@media (max-width: 430px) {
+
+  .creature-found-label,
+  .detail-found-label {
+
+    font-size: 8px;
+
+  }
+
+}
+
 
 
 

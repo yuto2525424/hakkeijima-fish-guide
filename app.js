@@ -2316,6 +2316,30 @@ const areaProgress =
       : "展示エリアを選ぶ";
 
 
+
+const facilityProgress =
+  getFacilityDiscoveryProgress(
+    facilityId
+  );
+
+
+const facilityPercent =
+  facilityProgress.total > 0
+
+    ? Math.round(
+        (
+          facilityProgress.found /
+          facilityProgress.total
+        )
+        * 1000
+      ) / 10
+
+    : 0;
+
+
+
+
+
   document.body.innerHTML = `
 
     <header
@@ -2355,6 +2379,49 @@ const areaProgress =
         ← 施設選択へ戻る
       </button>
 
+
+<section
+  class="facility-discovery-summary"
+  data-facility="${facilityId}"
+>
+
+  <div class="facility-discovery-head">
+
+    <span class="facility-discovery-count">
+      <span class="facility-discovery-heart">
+        ♥
+      </span>
+
+      ${facilityProgress.found}
+      /
+      ${facilityProgress.total}種
+    </span>
+
+
+    <strong class="facility-discovery-percent">
+      ${facilityPercent}%
+    </strong>
+
+  </div>
+
+
+  <div
+    class="facility-discovery-track"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="${facilityPercent}"
+  >
+
+    <div
+      class="facility-discovery-fill"
+      style="width: ${facilityPercent}%;"
+    >
+    </div>
+
+  </div>
+
+</section>
 
      <div
   class="labo-list facility-theme"
@@ -2602,12 +2669,45 @@ function showArea(
     );
 
 
+
+
+
+
+
+
+
+
   if (
     !facility ||
     !area
   ) {
     return;
   }
+
+
+const areaProgress =
+  getAreaDiscoveryProgress(
+    areaId
+  );
+
+
+const areaPercent =
+  areaProgress.total > 0
+
+    ? Math.round(
+        (
+          areaProgress.found /
+          areaProgress.total
+        )
+        * 1000
+      ) / 10
+
+    : 0;
+
+
+
+
+
 
 setPageBackground(facilityId);
 
@@ -2734,7 +2834,50 @@ setPageBackground(facilityId);
         ← 展示エリア一覧へ戻る
       </button>
 
+<section
+  class="area-discovery-summary"
+  data-facility="${facilityId}"
+>
 
+  <div class="area-discovery-head">
+
+    <span class="area-discovery-count">
+
+      <span class="area-discovery-heart">
+        ♥
+      </span>
+
+      ${areaProgress.found}
+      /
+      ${areaProgress.total}種
+
+    </span>
+
+
+    <strong class="area-discovery-percent">
+      ${areaPercent}%
+    </strong>
+
+  </div>
+
+
+  <div
+    class="area-discovery-track"
+    role="progressbar"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="${areaPercent}"
+  >
+
+    <div
+      class="area-discovery-fill"
+      style="width: ${areaPercent}%;"
+    >
+    </div>
+
+  </div>
+
+</section>
       
 
              ${fishHTML}
@@ -2944,23 +3087,29 @@ const isFound =
 
 
 
-<span
-  class="
-    creature-found-heart
-    ${isFound ? "is-found" : ""}
-  "
+<div class="detail-found-wrap">
 
-  data-found-fish-id="${fish.id}"
+  <span class="detail-found-label">
+    見た！
+  </span>
 
-  onclick="
-    toggleFoundFish(
-      '${fish.id}',
-      event
-    )
-  "
->
-  ${isFound ? "♥" : "♡"}
-</span>
+  <span
+    class="
+      detail-found-heart
+      ${isFound ? "is-found" : ""}
+    "
+    data-found-fish-id="${fish.id}"
+    onclick="
+      toggleFoundFish(
+        '${fish.id}',
+        event
+      )
+    "
+  >
+    ${isFound ? "♥" : "♡"}
+  </span>
+
+</div>
 
 
 
@@ -3695,14 +3844,18 @@ const isFound =
 
   <div class="creature-detail-title-row">
 
+<div class="creature-found-wrap">
+
+  <span class="creature-found-label">
+    見た！
+  </span>
+
   <span
     class="
-      detail-found-heart
+      creature-found-heart
       ${isFound ? "is-found" : ""}
     "
-
     data-found-fish-id="${fish.id}"
-
     onclick="
       toggleFoundFish(
         '${fish.id}',
@@ -3712,6 +3865,9 @@ const isFound =
   >
     ${isFound ? "♥" : "♡"}
   </span>
+
+</div>
+
 
 
   <h1 class="creature-detail-name">
