@@ -7520,8 +7520,405 @@ a {
 
 }
 
+/* ========================================
+   発見進捗
+======================================== */
+
+.discovery-progress {
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin-top: 6px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  /*
+    狭いスマホでは
+    必要なら2行にする
+  */
+  flex-wrap: wrap;
+
+  gap:
+    2px
+    5px;
+
+  color: #60798a;
+
+  font-size: 11px;
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  text-align: center;
+}
 
 
+.discovery-heart {
+
+  flex:
+    0
+    0
+    auto;
+
+  color: #ef6680;
+
+  font-size: 13px;
+}
+
+
+.discovery-count,
+.discovery-label {
+
+  /*
+    「12 / 130種」の途中では
+    改行しない
+  */
+  white-space: nowrap;
+
+}
+
+
+.facility-card
+.discovery-progress {
+
+  margin-top: 7px;
+
+}
+
+
+.labo-info
+.discovery-progress {
+
+  margin-top: 4px;
+
+}
+
+
+/* ========================================
+   小さいスマホ
+======================================== */
+
+@media (max-width: 430px) {
+
+  .facility-card
+  .discovery-progress,
+
+  .labo-card
+  .discovery-progress {
+
+    margin-top: 4px;
+
+    gap:
+      1px
+      4px;
+
+    font-size:
+      clamp(
+        8.5px,
+        2.6vw,
+        10px
+      );
+
+    line-height: 1.15;
+  }
+
+
+  .discovery-heart {
+
+    font-size: 11px;
+
+  }
+
+
+  .facility-card
+  .button-text,
+
+  .labo-info {
+
+    min-width: 0;
+
+  }
+
+}
+
+
+
+
+/* ========================================
+   生きもの一覧
+   発見ハート
+======================================== */
+
+.creature-card {
+
+  /*
+    画像｜文字｜ハート｜矢印
+  */
+  grid-template-columns:
+    clamp(
+      82px,
+      28vw,
+      120px
+    )
+    minmax(0, 1fr)
+    38px
+    20px
+    !important;
+
+  gap:
+    clamp(
+      6px,
+      2vw,
+      12px
+    );
+
+}
+
+
+/* ハート */
+
+.creature-found-heart {
+
+  grid-column: 3;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  justify-self: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  color: #9aadb9;
+
+  font-size: 27px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  position: relative;
+  z-index: 5;
+
+  transition:
+    transform 0.12s ease,
+    color 0.12s ease,
+    background 0.12s ease;
+
+}
+
+
+.creature-found-heart:active {
+
+  transform:
+    scale(0.85);
+
+}
+
+
+/* 発見済み */
+
+.creature-found-heart.is-found {
+
+  color: #ef6680;
+
+  background:
+    #fff0f3;
+
+}
+
+
+/* 矢印 */
+
+.creature-card .arrow {
+
+  grid-column: 4;
+
+}
+
+
+/* ========================================
+   小さいスマホ
+======================================== */
+
+@media (max-width: 430px) {
+
+  .creature-card {
+
+    grid-template-columns:
+      clamp(
+        76px,
+        27vw,
+        105px
+      )
+      minmax(0, 1fr)
+      32px
+      18px
+      !important;
+
+    gap:
+      clamp(
+        4px,
+        1.7vw,
+        8px
+      );
+
+  }
+
+
+  .creature-found-heart {
+
+    width: 31px;
+    height: 31px;
+
+    font-size: 23px;
+
+  }
+
+
+  .creature-card
+  .button-text {
+
+    min-width: 0;
+
+  }
+
+}
+
+
+/* ========================================
+   詳細ページ
+   発見ハート
+======================================== */
+
+.creature-detail-title-row {
+
+  display: grid;
+
+  grid-template-columns:
+    44px
+    minmax(0, auto)
+    44px;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  width: 100%;
+}
+
+
+.creature-detail-title-row
+.creature-detail-name {
+
+  margin: 0;
+
+  min-width: 0;
+
+  text-align: center;
+}
+
+
+.detail-found-heart {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  color: #9aadb9;
+
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition:
+    transform 0.12s ease,
+    color 0.12s ease,
+    background 0.12s ease;
+}
+
+
+.detail-found-heart:active {
+
+  transform: scale(0.85);
+
+}
+
+
+.detail-found-heart.is-found {
+
+  color: #ef6680;
+
+  background: #fff0f3;
+
+}
+
+
+.detail-title-spacer {
+
+  width: 40px;
+  height: 40px;
+
+}
+
+
+@media (max-width: 430px) {
+
+  .creature-detail-title-row {
+
+    grid-template-columns:
+      36px
+      minmax(0, auto)
+      36px;
+
+    gap: 5px;
+  }
+
+
+  .detail-found-heart {
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 25px;
+  }
+
+
+  .detail-title-spacer {
+
+    width: 34px;
+    height: 34px;
+  }
+
+}
 
 
 

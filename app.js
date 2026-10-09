@@ -273,6 +273,292 @@ function getAreaCode(area) {
 }
 
 
+
+
+// ========================================
+// 見つけた生きもの
+// 発見数の計算
+// ========================================
+
+const FOUND_FISH_STORAGE_KEY =
+  "fishguide-found-fish";
+
+
+function getFoundFishIds() {
+
+  try {
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          FOUND_FISH_STORAGE_KEY
+        )
+        ||
+        "[]"
+      );
+
+
+    return Array.isArray(saved)
+      ? saved
+      : [];
+
+
+  } catch (error) {
+
+    return [];
+
+  }
+
+}
+
+function isFishFound(fishId) {
+
+  return getFoundFishIds()
+    .includes(fishId);
+
+}
+
+
+function toggleFoundFish(
+  fishId,
+  event
+) {
+
+  if (event) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+  }
+
+
+  let foundIds =
+    getFoundFishIds();
+
+
+  const alreadyFound =
+    foundIds.includes(
+      fishId
+    );
+
+
+  if (alreadyFound) {
+
+    foundIds =
+      foundIds.filter(
+        function(id) {
+
+          return id !== fishId;
+
+        }
+      );
+
+  } else {
+
+    foundIds.push(
+      fishId
+    );
+
+  }
+
+
+  localStorage.setItem(
+    FOUND_FISH_STORAGE_KEY,
+    JSON.stringify(
+      foundIds
+    )
+  );
+
+
+  const isFound =
+    foundIds.includes(
+      fishId
+    );
+
+
+  document
+    .querySelectorAll(
+      `[data-found-fish-id="${fishId}"]`
+    )
+    .forEach(
+      function(heart) {
+
+        heart.textContent =
+          isFound
+            ? "♥"
+            : "♡";
+
+
+        heart.classList.toggle(
+          "is-found",
+          isFound
+        );
+
+      }
+    );
+
+}
+
+
+
+
+function getAreaDiscoveryProgress(
+  areaId
+) {
+
+  const foundIds =
+    new Set(
+      getFoundFishIds()
+    );
+
+
+  const fishes =
+    fishData.filter(
+      function(fish) {
+
+        return (
+          Array.isArray(
+            fish.areaIds
+          )
+          &&
+          fish.areaIds.includes(
+            areaId
+          )
+        );
+
+      }
+    );
+
+
+  const found =
+    fishes.filter(
+      function(fish) {
+
+        return foundIds.has(
+          fish.id
+        );
+
+      }
+    ).length;
+
+
+  return {
+
+    found:
+      found,
+
+    total:
+      fishes.length
+
+  };
+
+}
+
+
+function getFacilityDiscoveryProgress(
+  facilityId
+) {
+
+  const foundIds =
+    new Set(
+      getFoundFishIds()
+    );
+
+
+  const areaIds =
+    new Set(
+      getAreas(
+        facilityId
+      ).map(
+        function(area) {
+
+          return area.id;
+
+        }
+      )
+    );
+
+
+  const fishes =
+    fishData.filter(
+      function(fish) {
+
+        return (
+          Array.isArray(
+            fish.areaIds
+          )
+          &&
+          fish.areaIds.some(
+            function(areaId) {
+
+              return areaIds.has(
+                areaId
+              );
+
+            }
+          )
+        );
+
+      }
+    );
+
+
+  // 同じ魚が複数LABOにいても
+  // 施設全体では1種類として数える
+  const uniqueFishes =
+    Array.from(
+      new Map(
+        fishes.map(
+          function(fish) {
+
+            return [
+              fish.id,
+              fish
+            ];
+
+          }
+        )
+      ).values()
+    );
+
+
+  const found =
+    uniqueFishes.filter(
+      function(fish) {
+
+        return foundIds.has(
+          fish.id
+        );
+
+      }
+    ).length;
+
+
+  return {
+
+    found:
+      found,
+
+    total:
+      uniqueFishes.length
+
+  };
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ========================================
 // 詳細ページ「どこにいる？」
 // ========================================
@@ -531,6 +817,19 @@ let currentPhotoFile = null;
 let currentCameraStream = null;
 
 function openPhotoPicker(inputId) {
+
+  const input =
+    document.getElementById(inputId);
+
+  if (!input) {
+    return;
+  }
+
+  input.value = "";
+
+  input.click();
+
+}
 
 
 
@@ -866,17 +1165,7 @@ function capturePhotoFromCamera() {
 
 
 
-  const input =
-    document.getElementById(inputId);
-
-  if (!input) {
-    return;
-  }
-
-  input.value = "";
-
-  input.click();
-}
+ 
 
 
 function handlePhotoFile(input) {
@@ -1700,6 +1989,20 @@ const facilityTitleHtml = {
     'ふれあい<br class="facility-mobile-break">ラグーン'
 }[facility.id] || escapeHTML(facility.name);
 
+
+
+
+
+const facilityProgress =
+  getFacilityDiscoveryProgress(
+    facility.id
+  );
+
+
+
+
+
+
     facilityHTML += `
 
 
@@ -1753,6 +2056,23 @@ const facilityTitleHtml = {
   <small>
     ここにいる生きものを見る
   </small>
+
+
+  <div class="discovery-progress">
+
+    <span class="discovery-heart">
+      ♥
+    </span>
+
+    <span class="discovery-count">
+      ${facilityProgress.found}
+      /
+      ${facilityProgress.total}種
+    </span>
+
+  
+
+  </div>
 
 </div>
 
@@ -1878,22 +2198,28 @@ setPageBackground(facilityId);
     visibleAreas.forEach(
     function(area) {
 
-      const fishCount =
-        fishData.filter(
-          function(fish) {
+     const fishCount =
+  fishData.filter(
+    function(fish) {
 
-            return (
-              Array.isArray(
-                fish.areaIds
-              )
-              &&
-              fish.areaIds.includes(
-                area.id
-              )
-            );
+      return (
+        Array.isArray(
+          fish.areaIds
+        )
+        &&
+        fish.areaIds.includes(
+          area.id
+        )
+      );
 
-          }
-        ).length;
+    }
+  ).length;
+
+
+const areaProgress =
+  getAreaDiscoveryProgress(
+    area.id
+  );
 
 
       areaHTML += `
@@ -1924,19 +2250,25 @@ setPageBackground(facilityId);
                 area.name
               )}
             </strong>
+<small>
+  展示されている生きものを見る
+</small>
 
-            <small>
 
-              展示されている生きものを見る
+<div class="discovery-progress">
 
-              ${
-                fishCount > 0
-                  ? ` ・ ${fishCount}種`
-                  : ""
-              }
+  <span class="discovery-heart">
+    ♥
+  </span>
 
-            </small>
+  <span class="discovery-count">
+    ${areaProgress.found}
+    /
+    ${areaProgress.total}種
+  </span>
 
+
+</div>
           </div>
 
 
@@ -2471,6 +2803,12 @@ function createFishCards(
   fishes.forEach(
     function(fish) {
 
+
+const isFound =
+  isFishFound(
+    fish.id
+  );
+
       const cardFeature =
         (
           Array.isArray(fish.trivia)
@@ -2589,6 +2927,52 @@ function createFishCards(
 
 
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span
+  class="
+    creature-found-heart
+    ${isFound ? "is-found" : ""}
+  "
+
+  data-found-fish-id="${fish.id}"
+
+  onclick="
+    toggleFoundFish(
+      '${fish.id}',
+      event
+    )
+  "
+>
+  ${isFound ? "♥" : "♡"}
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           <div class="arrow">
@@ -3210,7 +3594,10 @@ function showFishDetail(
   if (!fish) {
     return;
   }
-
+const isFound =
+  isFishFound(
+    fish.id
+  );
 
 
   setPageBackground("none");
@@ -3306,11 +3693,41 @@ function showFishDetail(
       ← 一覧へ戻る
     </button>
 
+  <div class="creature-detail-title-row">
+
+  <span
+    class="
+      detail-found-heart
+      ${isFound ? "is-found" : ""}
+    "
+
+    data-found-fish-id="${fish.id}"
+
+    onclick="
+      toggleFoundFish(
+        '${fish.id}',
+        event
+      )
+    "
+  >
+    ${isFound ? "♥" : "♡"}
+  </span>
+
+
   <h1 class="creature-detail-name">
-  ${escapeHTML(
-    fish.nameJa
-  )}
-</h1>
+    ${escapeHTML(
+      fish.nameJa
+    )}
+  </h1>
+
+
+  <span
+    class="detail-title-spacer"
+    aria-hidden="true"
+  >
+  </span>
+
+</div>
 
 
 ${detailLocationHTML}
