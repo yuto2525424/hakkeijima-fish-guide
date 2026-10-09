@@ -528,9 +528,343 @@ function showHome() {
 
 let currentPhotoPreviewUrl = "";
 let currentPhotoFile = null;
-
+let currentCameraStream = null;
 
 function openPhotoPicker(inputId) {
+
+
+
+// ========================================
+// FishGuide専用カメラ
+// ========================================
+
+async function showPhotoCamera() {
+
+  setPageBackground("home");
+
+
+  document.body.innerHTML = `
+
+    <header class="app-header photo-search-header">
+
+      <div>
+
+        <p class="small-title">
+          PHOTO SEARCH
+        </p>
+
+        <h1>
+          写真から探す
+        </h1>
+
+      </div>
+
+    </header>
+
+
+    <main class="photo-camera-main">
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="closePhotoCameraAndHome()"
+      >
+        ← ホームに戻る
+      </button>
+
+
+      <section class="photo-camera-card">
+
+        <div class="photo-camera-view">
+
+          <video
+            id="photo-camera-video"
+            autoplay
+            playsinline
+            muted
+          >
+          </video>
+
+          <div
+            id="photo-camera-message"
+            class="photo-camera-message"
+          >
+            カメラを起動しています…
+          </div>
+
+        </div>
+
+
+        <p class="photo-camera-help">
+          生きものが画面の中央に
+          大きく写るように撮影してください。
+        </p>
+
+      </section>
+
+
+      <canvas
+        id="photo-camera-canvas"
+        hidden
+      >
+      </canvas>
+
+
+      <input
+        id="photo-library-input"
+        type="file"
+        accept="image/*"
+        onchange="selectPhotoFromLibrary(this)"
+        hidden
+      >
+
+
+      <div class="photo-camera-actions">
+
+        <button
+          class="photo-camera-library"
+          type="button"
+          onclick="
+            openPhotoPicker(
+              'photo-library-input'
+            )
+          "
+        >
+          <span>🖼</span>
+          写真から選ぶ
+        </button>
+
+
+        <button
+          class="photo-camera-shutter"
+          type="button"
+          onclick="capturePhotoFromCamera()"
+          aria-label="撮影"
+        >
+          <span></span>
+        </button>
+
+      </div>
+
+    </main>
+
+  `;
+
+
+  window.scrollTo(0, 0);
+
+
+  try {
+
+    currentCameraStream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+
+          facingMode: {
+            ideal: "environment"
+          }
+
+        },
+
+        audio: false
+
+      });
+
+
+    const video =
+      document.getElementById(
+        "photo-camera-video"
+      );
+
+
+    if (video) {
+
+      video.srcObject =
+        currentCameraStream;
+
+      await video.play();
+
+    }
+
+
+    const message =
+      document.getElementById(
+        "photo-camera-message"
+      );
+
+
+    if (message) {
+
+      message.style.display =
+        "none";
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Camera error:",
+      error
+    );
+
+
+    const message =
+      document.getElementById(
+        "photo-camera-message"
+      );
+
+
+    if (message) {
+
+      message.innerHTML = `
+        カメラを起動できませんでした。<br>
+        「写真から選ぶ」はそのまま利用できます。
+      `;
+
+    }
+
+  }
+
+}
+
+
+function stopPhotoCamera() {
+
+  if (!currentCameraStream) {
+    return;
+  }
+
+
+  currentCameraStream
+    .getTracks()
+    .forEach(
+      function(track) {
+
+        track.stop();
+
+      }
+    );
+
+
+  currentCameraStream = null;
+
+}
+
+
+function closePhotoCameraAndHome() {
+
+  stopPhotoCamera();
+
+  showHome();
+
+}
+
+
+function selectPhotoFromLibrary(input) {
+
+  stopPhotoCamera();
+
+  handlePhotoFile(input);
+
+}
+
+
+function capturePhotoFromCamera() {
+
+  const video =
+    document.getElementById(
+      "photo-camera-video"
+    );
+
+
+  const canvas =
+    document.getElementById(
+      "photo-camera-canvas"
+    );
+
+
+  if (
+    !video ||
+    !canvas ||
+    !video.videoWidth ||
+    !video.videoHeight
+  ) {
+
+    alert(
+      "カメラの準備ができていません。"
+    );
+
+    return;
+
+  }
+
+
+  canvas.width =
+    video.videoWidth;
+
+  canvas.height =
+    video.videoHeight;
+
+
+  const context =
+    canvas.getContext("2d");
+
+
+  context.drawImage(
+    video,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  canvas.toBlob(
+    function(blob) {
+
+      if (!blob) {
+
+        alert(
+          "写真を撮影できませんでした。"
+        );
+
+        return;
+
+      }
+
+
+      const file =
+        new File(
+          [blob],
+          `fishguide-${Date.now()}.jpg`,
+          {
+            type: "image/jpeg"
+          }
+        );
+
+
+      stopPhotoCamera();
+
+      showPhotoPreview(file);
+
+    },
+
+    "image/jpeg",
+
+    0.9
+
+  );
+
+}
+
+
+
+
+
+
+
 
   const input =
     document.getElementById(inputId);
@@ -646,29 +980,17 @@ function showPhotoPreview(file) {
       </section>
 
 
-      <input
-        id="photo-retake-input"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onchange="handlePhotoFile(this)"
-        hidden
-      >
-
+     
 
       <div class="photo-search-actions">
 
-        <button
-          class="photo-search-secondary"
-          type="button"
-          onclick="
-            openPhotoPicker(
-              'photo-retake-input'
-            )
-          "
-        >
-          📷 撮り直す
-        </button>
+       <button
+  class="photo-search-secondary"
+  type="button"
+  onclick="showPhotoCamera()"
+>
+  📷 撮り直す
+</button>
 
 
         <button
@@ -1313,28 +1635,16 @@ function showPhotoSearchResults(
       </p>
 
 
-      <input
-        id="photo-search-again-input"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        onchange="handlePhotoFile(this)"
-        hidden
-      >
+    
 
 
-      <button
-        class="photo-search-again"
-        type="button"
-
-        onclick="
-          openPhotoPicker(
-            'photo-search-again-input'
-          )
-        "
-      >
-        📷 もう一度写真から探す
-      </button>
+    <button
+  class="photo-search-again"
+  type="button"
+  onclick="showPhotoCamera()"
+>
+  📷 もう一度写真から探す
+</button>
 
     </main>
 
