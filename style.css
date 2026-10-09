@@ -8394,6 +8394,733 @@ a {
 }
 
 
+/* ========================================
+   FishGuide
+   最終レスポンシブ基盤
+======================================== */
+
+
+/* ========================================
+   施設カード
+   名前・説明・発見数を絶対に重ねない
+======================================== */
+
+.facility-card .button-text {
+
+  min-width: 0 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 4px;
+
+  overflow: hidden;
+
+}
+
+
+/* 順番を固定 */
+
+.facility-card .button-text strong {
+
+  order: 1;
+
+  margin: 0 !important;
+
+  line-height: 1.15;
+
+}
+
+
+.facility-card .button-text > small {
+
+  order: 2;
+
+  margin: 0 !important;
+
+}
+
+
+.facility-card .discovery-progress {
+
+  order: 3;
+
+  position: static !important;
+
+  margin:
+    3px
+    0
+    0 !important;
+
+  width: 100%;
+
+  flex-shrink: 0;
+
+}
+
+
+/* ========================================
+   通常スマホ
+======================================== */
+
+@media (max-width: 600px) {
+
+  .facility-card {
+
+    min-height:
+      clamp(
+        122px,
+        29vw,
+        150px
+      );
+
+  }
+
+
+  .facility-card
+  .button-text strong {
+
+    font-size:
+      clamp(
+        15px,
+        4.3vw,
+        20px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .button-text > small {
+
+    font-size:
+      clamp(
+        9px,
+        2.7vw,
+        12px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .discovery-progress {
+
+    font-size:
+      clamp(
+        9px,
+        2.7vw,
+        11px
+      ) !important;
+
+  }
+
+}
+
+
+/* ========================================
+   かなり小さいスマホ
+======================================== */
+
+@media (max-width: 390px) {
+
+  .facility-card {
+
+    gap: 7px !important;
+
+    padding:
+      10px
+      10px
+      10px
+      9px !important;
+
+  }
+
+
+  .facility-card
+  .button-text {
+
+    gap: 2px;
+
+  }
+
+
+  .facility-card
+  .button-text strong {
+
+    font-size:
+      clamp(
+        13px,
+        4.1vw,
+        16px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .button-text > small {
+
+    font-size: 9px !important;
+
+  }
+
+
+  .facility-card
+  .discovery-progress {
+
+    margin-top: 2px !important;
+
+    font-size: 9px !important;
+
+  }
+
+}
+
+
+/* ========================================
+   専用カメラ
+   画面高に応じて自動縮小
+======================================== */
+
+.photo-camera-main {
+
+  box-sizing: border-box;
+
+  width: 100%;
+
+  padding:
+    8px
+    14px
+    max(
+      12px,
+      env(safe-area-inset-bottom)
+    );
+
+}
+
+
+/*
+  以前の固定3:4をやめ、
+  端末の高さに応じて変える
+*/
+
+.photo-camera-view {
+
+  width: 100%;
+
+  height:
+    clamp(
+      260px,
+      48dvh,
+      520px
+    );
+
+  aspect-ratio: auto !important;
+
+}
+
+
+/* 説明文も小さく */
+
+.photo-camera-help {
+
+  padding:
+    8px
+    12px !important;
+
+  font-size:
+    clamp(
+      10px,
+      2.8vw,
+      12px
+    );
+
+}
+
+
+/* 写真選択＋シャッター */
+
+.photo-camera-actions {
+
+  min-height: 72px !important;
+
+  margin-top: 10px !important;
+
+}
+
+
+/* シャッター */
+
+.photo-camera-shutter {
+
+  width:
+    clamp(
+      58px,
+      16vw,
+      72px
+    ) !important;
+
+  height:
+    clamp(
+      58px,
+      16vw,
+      72px
+    ) !important;
+
+}
+
+
+/* 写真から選ぶ */
+
+.photo-camera-library {
+
+  min-height: 58px !important;
+
+  padding:
+    6px
+    8px !important;
+
+  font-size:
+    clamp(
+      10px,
+      2.8vw,
+      12px
+    ) !important;
+
+}
+
+
+/* ========================================
+   高さが小さいスマホ
+   iPhone SE系など
+======================================== */
+
+@media (max-height: 750px) {
+
+  .photo-search-header {
+
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+
+  }
+
+
+  .photo-search-header h1 {
+
+    margin: 2px 0 !important;
+
+    font-size:
+      clamp(
+        21px,
+        6vw,
+        28px
+      ) !important;
+
+  }
+
+
+  .photo-camera-main {
+
+    padding-top: 5px;
+
+  }
+
+
+  .photo-camera-main
+  .back-button {
+
+    margin-bottom: 7px !important;
+
+    padding:
+      7px
+      11px !important;
+
+    font-size: 12px !important;
+
+  }
+
+
+  .photo-camera-view {
+
+    height:
+      clamp(
+        220px,
+        40dvh,
+        330px
+      );
+
+  }
+
+
+  .photo-camera-help {
+
+    padding:
+      5px
+      8px !important;
+
+  }
+
+
+  .photo-camera-actions {
+
+    margin-top: 6px !important;
+
+    min-height: 62px !important;
+
+  }
+
+
+  .photo-camera-shutter {
+
+    width: 56px !important;
+    height: 56px !important;
+
+  }
+
+}
+
+
+/* ========================================
+   さらに低い画面
+======================================== */
+
+@media (max-height: 650px) {
+
+  .photo-camera-view {
+
+    height: 35dvh;
+
+    min-height: 190px;
+
+  }
+
+
+  .photo-camera-help {
+
+    font-size: 9px;
+
+  }
+
+
+  .photo-camera-actions {
+
+    min-height: 55px !important;
+
+  }
+
+
+  .photo-camera-shutter {
+
+    width: 50px !important;
+    height: 50px !important;
+
+  }
+
+}
+/* ========================================
+   施設カード
+   重なり完全防止 最終版
+======================================== */
+
+.facility-card .button-text {
+
+  position: static !important;
+
+  display: grid !important;
+
+  grid-template-rows:
+    auto
+    auto
+    auto;
+
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  align-items: center !important;
+  justify-items: center !important;
+
+  align-content: center;
+
+  gap: 5px !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  height: auto !important;
+
+  overflow: visible !important;
+
+  transform: none !important;
+
+  text-align: center !important;
+}
+
+
+/* 1段目：施設名 */
+
+.facility-card
+.button-text
+strong {
+
+  position: static !important;
+
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+
+  line-height: 1.18 !important;
+
+  text-align: center !important;
+}
+
+
+/* 2段目：説明 */
+
+.facility-card
+.button-text
+> small {
+
+  position: static !important;
+
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+
+  width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+
+  text-align: center !important;
+}
+
+
+/* 3段目：発見数 */
+
+.facility-card
+.discovery-progress {
+
+  position: static !important;
+
+  grid-row: 3 !important;
+  grid-column: 1 !important;
+
+  display: flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: nowrap !important;
+
+  gap: 4px !important;
+
+  width: 100% !important;
+
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+
+  line-height: 1 !important;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   スマホ
+======================================== */
+
+@media (max-width: 600px) {
+
+  .facility-card {
+
+    min-height:
+      clamp(
+        128px,
+        32vw,
+        152px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .button-text {
+
+    gap: 4px !important;
+
+  }
+
+
+  .facility-card
+  .button-text
+  strong {
+
+    font-size:
+      clamp(
+        14px,
+        4.2vw,
+        19px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .button-text
+  > small {
+
+    font-size:
+      clamp(
+        9px,
+        2.7vw,
+        11px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .discovery-progress {
+
+    font-size:
+      clamp(
+        9px,
+        2.6vw,
+        10.5px
+      ) !important;
+
+  }
+
+}
+
+
+/* ========================================
+   特に小さいスマホ
+======================================== */
+
+@media (max-width: 390px) {
+
+  .facility-card {
+
+    min-height: 136px !important;
+
+  }
+
+
+  .facility-card
+  .button-text {
+
+    gap: 3px !important;
+
+  }
+
+
+  .facility-card
+  .button-text
+  strong {
+
+    font-size:
+      clamp(
+        13px,
+        4vw,
+        15px
+      ) !important;
+
+  }
+
+
+  .facility-card
+  .button-text
+  > small {
+
+    font-size: 8.5px !important;
+
+  }
+
+
+  .facility-card
+  .discovery-progress {
+
+    font-size: 8.5px !important;
+
+  }
+
+}
+/* ========================================
+   施設カード 発見数のズレ修正
+======================================== */
+
+.facility-card
+.discovery-progress {
+
+  display: flex !important;
+
+  flex-direction: row !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 5px !important;
+
+  width: 100% !important;
+
+  margin-top: 3px !important;
+
+  white-space: nowrap !important;
+}
+
+
+.facility-card
+.discovery-progress
+> span {
+
+  width: auto !important;
+
+  min-width: 0 !important;
+
+  flex:
+    0
+    0
+    auto !important;
+
+  display: inline-block !important;
+
+  text-align: center !important;
+
+}
+
+
+.facility-card
+.discovery-heart {
+
+  color: #ef6680 !important;
+
+}
+
+
+.facility-card
+.discovery-count {
+
+  color: #748c9c !important;
+
+}
+
+
+
 
 
 
