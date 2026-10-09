@@ -484,6 +484,31 @@ function setupHome() {
 
 function showHome() {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   document.body.innerHTML =
     homeScreen;
 
@@ -494,6 +519,839 @@ function showHome() {
   window.scrollTo(0, 0);
 
 }
+
+
+
+// ========================================
+// 写真から探す
+// ========================================
+
+let currentPhotoPreviewUrl = "";
+let currentPhotoFile = null;
+
+
+function openPhotoPicker(inputId) {
+
+  const input =
+    document.getElementById(inputId);
+
+  if (!input) {
+    return;
+  }
+
+  input.value = "";
+
+  input.click();
+}
+
+
+function handlePhotoFile(input) {
+
+  if (
+    !input.files ||
+    input.files.length === 0
+  ) {
+    return;
+  }
+
+
+  const file =
+    input.files[0];
+
+
+  if (!file.type.startsWith("image/")) {
+
+    alert(
+      "画像ファイルを選択してください。"
+    );
+
+    return;
+  }
+
+
+  showPhotoPreview(file);
+
+}
+
+
+function showPhotoPreview(file) {
+
+  setPageBackground("home");
+
+  currentPhotoFile = file;
+
+  if (currentPhotoPreviewUrl) {
+
+    URL.revokeObjectURL(
+      currentPhotoPreviewUrl
+    );
+
+  }
+
+
+  currentPhotoPreviewUrl =
+    URL.createObjectURL(file);
+
+
+  document.body.innerHTML = `
+
+    <header
+      class="app-header photo-search-header"
+    >
+
+      <div>
+
+        <p class="small-title">
+          PHOTO SEARCH
+        </p>
+
+        <h1>
+          写真から探す
+        </h1>
+
+      </div>
+
+    </header>
+
+
+    <main class="photo-search-main">
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showHome()"
+      >
+        ← ホームに戻る
+      </button>
+
+
+      <section class="photo-preview-card">
+
+        <p class="photo-preview-label">
+          撮影した写真
+        </p>
+
+        <img
+          src="${currentPhotoPreviewUrl}"
+          alt="検索する生きものの写真"
+          class="photo-search-preview"
+        >
+
+
+        <p class="photo-preview-help">
+          生きものができるだけ大きく
+          写っている写真がおすすめです。
+        </p>
+
+      </section>
+
+
+      <input
+        id="photo-retake-input"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onchange="handlePhotoFile(this)"
+        hidden
+      >
+
+
+      <div class="photo-search-actions">
+
+        <button
+          class="photo-search-secondary"
+          type="button"
+          onclick="
+            openPhotoPicker(
+              'photo-retake-input'
+            )
+          "
+        >
+          📷 撮り直す
+        </button>
+
+
+        <button
+  class="photo-search-primary"
+  type="button"
+  onclick="startPhotoSearch()"
+>
+  この写真で探す
+</button>
+
+      </div>
+
+
+      <p class="photo-search-coming-soon">
+        次の工程で、
+        Fish Guideに登録されている生きものから
+        候補をランキング表示します。
+      </p>
+
+    </main>
+
+
+    ${createFooter("home")}
+
+  `;
+
+
+  window.scrollTo(0, 0);
+
+}
+
+
+
+function preparePhotoForAI(file) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function() {
+
+          const image =
+            new Image();
+
+
+          image.onload =
+            function() {
+
+              const maxSize = 1280;
+
+              const scale =
+                Math.min(
+                  1,
+                  maxSize /
+                  Math.max(
+                    image.naturalWidth,
+                    image.naturalHeight
+                  )
+                );
+
+
+              const width =
+                Math.round(
+                  image.naturalWidth * scale
+                );
+
+              const height =
+                Math.round(
+                  image.naturalHeight * scale
+                );
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              canvas.width = width;
+              canvas.height = height;
+
+
+              const context =
+                canvas.getContext("2d");
+
+
+              context.drawImage(
+                image,
+                0,
+                0,
+                width,
+                height
+              );
+
+
+              resolve(
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.82
+                )
+              );
+
+            };
+
+
+          image.onerror = reject;
+
+          image.src = reader.result;
+
+        };
+
+
+      reader.onerror = reject;
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+
+// ========================================
+// 写真検索
+// AI検索
+// ========================================
+
+async function startPhotoSearch() {
+
+  if (!currentPhotoFile) {
+
+    alert(
+      "検索する写真を選択してください。"
+    );
+
+    return;
+  }
+
+
+  showPhotoSearchLoading();
+
+
+  try {
+
+    // 写真をAI送信用に軽くする
+    const image =
+      await preparePhotoForAI(
+        currentPhotoFile
+      );
+
+
+    // FishGuide登録生物のうち
+    // 写真が登録されている魚類だけを候補にする
+    const candidates =
+      fishData
+
+        .filter(
+          function(fish) {
+
+            return (
+              fish.category === "魚類"
+              &&
+              fish.image
+            );
+
+          }
+        )
+
+        .map(
+          function(fish) {
+
+            return {
+
+              id:
+                fish.id,
+
+              nameJa:
+                fish.nameJa,
+
+              scientificName:
+                fish.scientificName || "",
+
+              bodyLength:
+                fish.bodyLength || "",
+
+              features:
+                fish.features || "",
+
+              identification:
+                fish.identification || ""
+
+            };
+
+          }
+        );
+
+
+    const apiResponse =
+      await fetch(
+        "/api/photo-search",
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              image:
+                image,
+
+              candidates:
+                candidates
+
+            })
+
+        }
+      );
+
+
+    const data =
+      await apiResponse.json();
+
+
+    if (!apiResponse.ok) {
+
+      throw new Error(
+        data.error ||
+        "画像検索に失敗しました"
+      );
+
+    }
+
+
+    showPhotoSearchResults(
+      data.results || []
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Photo search error:",
+      error
+    );
+
+
+    alert(
+      "画像検索に失敗しました。\n" +
+      "もう一度お試しください。"
+    );
+
+
+    if (currentPhotoFile) {
+
+      showPhotoPreview(
+        currentPhotoFile
+      );
+
+    } else {
+
+      showHome();
+
+    }
+
+  }
+
+}
+
+
+// ========================================
+// 検索中画面
+// ========================================
+
+function showPhotoSearchLoading() {
+
+  setPageBackground("home");
+
+
+  document.body.innerHTML = `
+
+    <header
+      class="app-header photo-search-header"
+    >
+
+      <div>
+
+        <p class="small-title">
+          PHOTO SEARCH
+        </p>
+
+        <h1>
+          写真から探す
+        </h1>
+
+      </div>
+
+    </header>
+
+
+    <main class="photo-search-main">
+
+      <section
+        class="photo-search-loading"
+      >
+
+        <div
+          class="photo-search-spinner"
+        >
+        </div>
+
+
+        <h2>
+          生きものを探しています
+        </h2>
+
+
+        <p>
+          Fish Guideに登録されている
+          生きものと比較しています…
+        </p>
+
+      </section>
+
+    </main>
+
+
+    ${createFooter("home")}
+
+  `;
+
+
+  window.scrollTo(0, 0);
+
+}
+
+
+// ========================================
+// AI検索結果
+// ========================================
+
+function showPhotoSearchResults(
+  results
+) {
+
+  setPageBackground("home");
+
+
+  const normalizedResults =
+    (
+      Array.isArray(results)
+        ? results
+        : []
+    )
+
+      .map(
+        function(result) {
+
+          const fish =
+            fishData.find(
+              function(item) {
+
+                return (
+                  item.id ===
+                  result.id
+                );
+
+              }
+            );
+
+
+          if (!fish) {
+
+            return null;
+
+          }
+
+
+          return {
+
+            fish:
+              fish,
+
+            level:
+              result.level || "中",
+
+            reason:
+              result.reason || ""
+
+          };
+
+        }
+      )
+
+      .filter(Boolean)
+
+      .slice(0, 3);
+
+
+  let resultHTML = "";
+
+
+  if (
+    normalizedResults.length === 0
+  ) {
+
+    resultHTML = `
+
+      <section class="empty-card">
+
+        <div class="empty-icon">
+          📷
+        </div>
+
+        <h2>
+          候補を絞り込めませんでした
+        </h2>
+
+        <p>
+          生きものが大きく写るように
+          撮り直してみてください。
+        </p>
+
+      </section>
+
+    `;
+
+  }
+
+
+  normalizedResults.forEach(
+    function(result, index) {
+
+      const fish =
+        result.fish;
+
+
+      resultHTML += `
+
+        <article
+          class="photo-result-card"
+        >
+
+          <div
+            class="photo-result-rank"
+          >
+
+            ${index + 1}
+
+            <span>
+              位
+            </span>
+
+          </div>
+
+
+          <div
+            class="photo-result-image"
+          >
+
+            ${
+              fish.image
+
+                ? `
+                  <img
+                    src="${escapeHTML(
+                      fish.image
+                    )}"
+
+                    alt="${escapeHTML(
+                      fish.nameJa
+                    )}"
+                  >
+                `
+
+                : "🐟"
+            }
+
+          </div>
+
+
+          <div
+            class="photo-result-info"
+          >
+
+            <small>
+              候補度：
+              ${escapeHTML(
+                result.level
+              )}
+            </small>
+
+
+            <strong>
+              ${escapeHTML(
+                fish.nameJa
+              )}
+            </strong>
+
+
+            ${
+              result.reason
+
+                ? `
+                  <small>
+                    ${escapeHTML(
+                      result.reason
+                    )}
+                  </small>
+                `
+
+                : ""
+            }
+
+
+            <button
+              type="button"
+
+              onclick="
+                showFishDetail(
+                  '${fish.id}'
+                )
+              "
+            >
+              詳しく見る
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+  );
+
+
+  document.body.innerHTML = `
+
+    <header
+      class="app-header photo-search-header"
+    >
+
+      <div>
+
+        <p class="small-title">
+          PHOTO SEARCH
+        </p>
+
+        <h1>
+          検索結果
+        </h1>
+
+      </div>
+
+    </header>
+
+
+    <main class="photo-search-main">
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showHome()"
+      >
+        ← ホームに戻る
+      </button>
+
+
+      ${
+        currentPhotoPreviewUrl
+
+          ? `
+            <section
+              class="photo-result-query"
+            >
+
+              <small>
+                検索した写真
+              </small>
+
+              <img
+                src="${currentPhotoPreviewUrl}"
+                alt="検索に使用した写真"
+              >
+
+            </section>
+          `
+
+          : ""
+      }
+
+
+      <section
+        class="photo-result-heading"
+      >
+
+        <span>
+          AI候補
+        </span>
+
+        <h2>
+          似ている生きもの
+        </h2>
+
+        <p>
+          Fish Guide登録生物の中から
+          候補を表示しています。
+        </p>
+
+      </section>
+
+
+      <div
+        class="photo-result-list"
+      >
+
+        ${resultHTML}
+
+      </div>
+
+
+      <p
+        class="photo-result-warning"
+      >
+
+        ※AIによる画像判定のため、
+        実際の生きものと
+        異なる場合があります。
+
+      </p>
+
+
+      <input
+        id="photo-search-again-input"
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onchange="handlePhotoFile(this)"
+        hidden
+      >
+
+
+      <button
+        class="photo-search-again"
+        type="button"
+
+        onclick="
+          openPhotoPicker(
+            'photo-search-again-input'
+          )
+        "
+      >
+        📷 もう一度写真から探す
+      </button>
+
+    </main>
+
+
+    ${createFooter("fish")}
+
+  `;
+
+
+  window.scrollTo(0, 0);
+
+}
+
+
+
+
+
 
 
 // ========================================

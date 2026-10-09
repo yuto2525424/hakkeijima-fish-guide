@@ -139,6 +139,54 @@
     </button>
 
 
+<!-- 写真から探す -->
+<button
+  class="main-button fish-button photo-search-button"
+  type="button"
+  onclick="openPhotoPicker('photo-search-input')"
+>
+
+  <div class="button-icon">
+    📷
+  </div>
+
+  <div class="button-text">
+
+    <span>
+      名前が分からなくてもOK
+    </span>
+
+    <strong>
+      写真から探す
+    </strong>
+
+    <small>
+      生きものを撮影して候補を検索
+    </small>
+
+  </div>
+
+  <div class="arrow">
+    ›
+  </div>
+
+</button>
+
+
+<input
+  id="photo-search-input"
+  type="file"
+  accept="image/*"
+  capture="environment"
+  onchange="handlePhotoFile(this)"
+  hidden
+>
+
+
+
+
+
+
     <p class="ai-note">
       ※本サイトの生物情報の一部は、文献・公開情報などを参考に、AIを活用して作成・整理しています。正確性の確認に努めていますが、誤りや情報の更新遅れが生じる場合があります。
     </p>

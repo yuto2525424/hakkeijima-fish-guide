@@ -6627,3 +6627,702 @@ a {
   }
 
 }
+
+
+
+
+
+
+
+
+
+/* ========================================
+   写真から探す
+======================================== */
+
+
+/* ホームの写真検索ボタン */
+
+
+
+
+
+
+  color: #17364a;
+
+  border:
+    2px solid #17364a;
+
+  box-shadow:
+    0 5px 0 #abcce1,
+    0 10px 20px
+      rgba(40, 90, 120, 0.14);
+}
+
+
+.home-main
+.photo-search-button:active {
+
+  transform:
+    translateY(4px);
+
+  box-shadow:
+    0 1px 0 #abcce1,
+    0 5px 10px
+      rgba(40, 90, 120, 0.12);
+}
+
+
+.home-main
+.photo-search-button
+.button-text {
+
+  text-align: center;
+  align-items: center;
+}
+
+
+.home-main
+.photo-search-button
+.button-text span,
+
+.home-main
+.photo-search-button
+.button-text strong,
+
+.home-main
+.photo-search-button
+.button-text small {
+
+  width: 100%;
+
+  text-align: center;
+
+  color: #17364a;
+}
+
+
+/* ========================================
+   写真確認画面
+======================================== */
+
+.photo-search-header {
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+.photo-search-header > div {
+
+  width: 100%;
+}
+
+
+.photo-search-header h1 {
+
+  width: 72%;
+  max-width: 420px;
+
+  margin:
+    0
+    auto;
+
+  padding:
+    0
+    0
+    14px;
+
+  border-bottom:
+    2px solid #8eb3c9;
+
+  text-align: center;
+}
+
+
+.photo-preview-card {
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border:
+    2px solid #17364a;
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 6px 0
+      rgba(23, 54, 74, 0.16),
+    0 12px 22px
+      rgba(40, 90, 120, 0.12);
+}
+
+
+.photo-preview-label {
+
+  margin:
+    0
+    0
+    12px;
+
+  text-align: center;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  color: #17364a;
+}
+
+
+.photo-search-preview {
+
+  display: block;
+
+  width: 100%;
+  max-height: 420px;
+
+  object-fit: contain;
+
+  border-radius: 18px;
+
+  background: #eaf6ff;
+}
+
+
+.photo-preview-help {
+
+  margin:
+    12px
+    4px
+    0;
+
+  text-align: center;
+
+  color: #60798a;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+/* ボタン2個 */
+
+.photo-search-actions {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+
+.photo-search-actions button {
+
+  min-height: 54px;
+
+  padding:
+    10px
+    12px;
+
+  border-radius: 16px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.photo-search-secondary {
+
+  background: #ffffff;
+
+  color: #17364a;
+
+  border:
+    2px solid #17364a;
+}
+
+
+.photo-search-primary {
+
+  background: #369df5;
+
+  color: #ffffff;
+
+  border:
+    2px solid #17364a;
+}
+
+
+.photo-search-primary:disabled {
+
+  opacity: 0.45;
+
+  cursor: default;
+}
+
+
+.photo-search-coming-soon {
+
+  margin:
+    16px
+    6px
+    0;
+
+  text-align: center;
+
+  color: #6f8191;
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   写真検索
+   検索中
+======================================== */
+
+.photo-search-loading {
+
+  margin-top: 40px;
+
+  padding:
+    50px
+    20px;
+
+  background: #ffffff;
+
+  border:
+    2px solid #17364a;
+
+  border-radius: 25px;
+
+  text-align: center;
+
+  box-shadow:
+    0 6px 0
+      rgba(23, 54, 74, 0.16),
+    0 12px 22px
+      rgba(40, 90, 120, 0.12);
+}
+
+
+.photo-search-loading h2 {
+
+  margin:
+    20px
+    0
+    8px;
+
+  color: #17364a;
+
+  font-size: 21px;
+}
+
+
+.photo-search-loading p {
+
+  margin: 0;
+
+  color: #60798a;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+.photo-search-spinner {
+
+  width: 48px;
+  height: 48px;
+
+  margin:
+    0
+    auto;
+
+  border:
+    5px solid #d7eaf5;
+
+  border-top-color:
+    #369df5;
+
+  border-radius: 50%;
+
+  animation:
+    photo-search-spin
+    0.8s
+    linear
+    infinite;
+}
+
+
+@keyframes photo-search-spin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+/* ========================================
+   検索に使った写真
+======================================== */
+
+.photo-result-query {
+
+  margin-bottom: 18px;
+
+  padding: 12px;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  border:
+    1px solid #d8e7f0;
+
+  text-align: center;
+}
+
+
+.photo-result-query small {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #60798a;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+.photo-result-query img {
+
+  display: block;
+
+  width: 100%;
+  max-height: 220px;
+
+  object-fit: contain;
+
+  border-radius: 15px;
+
+  background: #eaf6ff;
+}
+
+
+/* ========================================
+   結果タイトル
+======================================== */
+
+.photo-result-heading {
+
+  margin-bottom: 15px;
+
+  text-align: center;
+}
+
+
+.photo-result-heading span {
+
+  display: inline-block;
+
+  padding:
+    4px
+    10px;
+
+  background: #369df5;
+
+  color: #ffffff;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+.photo-result-heading h2 {
+
+  margin:
+    8px
+    0
+    4px;
+
+  color: #17364a;
+
+  font-size: 22px;
+}
+
+
+.photo-result-heading p {
+
+  margin: 0;
+
+  color: #60798a;
+
+  font-size: 12px;
+}
+
+
+/* ========================================
+   ランキング
+======================================== */
+
+.photo-result-list {
+
+  display: grid;
+
+  gap: 14px;
+}
+
+
+.photo-result-card {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    52px
+    105px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px;
+
+  background: #ffffff;
+
+  border:
+    2px solid #17364a;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 5px 0
+      rgba(23, 54, 74, 0.16),
+    0 10px 18px
+      rgba(40, 90, 120, 0.12);
+}
+
+
+.photo-result-rank {
+
+  color: #369df5;
+
+  font-size: 30px;
+  font-weight: 900;
+
+  text-align: center;
+}
+
+
+.photo-result-rank span {
+
+  font-size: 12px;
+}
+
+
+.photo-result-image {
+
+  width: 105px;
+  height: 88px;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: #eaf6ff;
+
+  font-size: 30px;
+}
+
+
+.photo-result-image img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.photo-result-info {
+
+  min-width: 0;
+
+  text-align: center;
+}
+
+
+.photo-result-info small {
+
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #60798a;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+.photo-result-info strong {
+
+  display: block;
+
+  color: #17364a;
+
+  font-size: 18px;
+  line-height: 1.25;
+
+  word-break: keep-all;
+}
+
+
+.photo-result-info button {
+
+  margin-top: 8px;
+
+  padding:
+    7px
+    12px;
+
+  border:
+    1.5px solid #369df5;
+
+  border-radius: 999px;
+
+  background: #eaf6ff;
+
+  color: #167bc9;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   注意書き・再検索
+======================================== */
+
+.photo-result-warning {
+
+  margin:
+    18px
+    5px;
+
+  color: #6f8191;
+
+  font-size: 10px;
+  line-height: 1.6;
+
+  text-align: center;
+}
+
+
+.photo-search-again {
+
+  width: 100%;
+
+  min-height: 58px;
+
+  margin-bottom: 20px;
+
+  border:
+    2px solid #17364a;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e4f4ff,
+      #cfe9fb
+    );
+
+  color: #17364a;
+
+  font-size: 15px;
+  font-weight: 800;
+
+  box-shadow:
+    0 4px 0 #abcce1;
+
+  cursor: pointer;
+}
+
+
+.photo-search-again:active {
+
+  transform:
+    translateY(3px);
+
+  box-shadow:
+    0 1px 0 #abcce1;
+}
+
+
+/* 小さいスマホ */
+
+@media (max-width: 400px) {
+
+  .photo-result-card {
+
+    grid-template-columns:
+      42px
+      82px
+      minmax(0, 1fr);
+
+    gap: 8px;
+
+    padding: 10px;
+  }
+
+
+  .photo-result-image {
+
+    width: 82px;
+    height: 74px;
+  }
+
+
+  .photo-result-info strong {
+
+    font-size: 15px;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
