@@ -1293,11 +1293,6 @@ function showPhotoPreview(file) {
       </div>
 
 
-      <p class="photo-search-coming-soon">
-        次の工程で、
-        Fish Guideに登録されている生きものから
-        候補をランキング表示します。
-      </p>
 
     </main>
 
@@ -2733,6 +2728,15 @@ setPageBackground(facilityId);
     );
 
 
+  const unfoundOnly = isUnfoundOnlyMode();
+
+  const shownFishes =
+    unfoundOnly
+      ? fishes.filter(function(fish) {
+          return !isFishFound(fish.id);
+        })
+      : fishes;
+
   let fishHTML = "";
 
 
@@ -2764,11 +2768,29 @@ setPageBackground(facilityId);
    else {
 
     fishHTML =
-      createFishCards(
-        fishes,
-        facilityId,
-        areaId
-      );
+      shownFishes.length > 0
+        ? createFishCards(
+            shownFishes,
+            facilityId,
+            areaId
+          )
+        : `
+          <section class="empty-card">
+
+            <div class="empty-icon">
+              🎉
+            </div>
+
+            <h2>
+              この場所の生きものは全部見つけました
+            </h2>
+
+            <p>
+              「すべて表示に戻す」で、全部の生きものを確認できます。
+            </p>
+
+          </section>
+        `;
 
   }
 
@@ -2880,6 +2902,8 @@ setPageBackground(facilityId);
 </section>
       
 
+             ${createUnfoundFilterButton(facilityId, areaId)}
+
              ${fishHTML}
 
 
@@ -2933,6 +2957,54 @@ setPageBackground(facilityId);
 // ========================================
 // 魚カード
 // ========================================
+
+// ========================================
+// 未発見のみ表示（展示エリア画面）
+// ========================================
+
+// 切り替え状態（ページを開き直すとオフに戻る）
+let showUnfoundOnly = false;
+
+
+function isUnfoundOnlyMode() {
+
+  return showUnfoundOnly;
+
+}
+
+
+function toggleUnfoundOnly(
+  facilityId,
+  areaId
+) {
+
+  showUnfoundOnly = !showUnfoundOnly;
+
+  showArea(
+    facilityId,
+    areaId
+  );
+
+}
+
+
+function createUnfoundFilterButton(
+  facilityId,
+  areaId
+) {
+
+  return `
+    <button
+      type="button"
+      class="unfound-filter-button ${showUnfoundOnly ? "is-active" : ""}"
+      onclick="toggleUnfoundOnly('${facilityId}', '${areaId}')"
+    >
+      ${showUnfoundOnly ? "すべて表示に戻す" : "未発見のみ表示"}
+    </button>
+  `;
+
+}
+
 
 function createFishCards(
   fishes,
@@ -4469,7 +4541,7 @@ function createFooter(active) {
         onclick="showHome()"
       >
 
-        <span>⌂</span>
+        <span><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M10 20v-6h4v6"/></svg></span>
 
         ホーム
 
@@ -4485,7 +4557,7 @@ function createFooter(active) {
         onclick="showFacilities()"
       >
 
-        <span>📍</span>
+        <span><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
 
         場所
 
@@ -4501,7 +4573,7 @@ function createFooter(active) {
         onclick="showFishList()"
       >
 
-        <span>⌕</span>
+        <span><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
 
         生きもの
 
